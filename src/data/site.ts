@@ -4,7 +4,7 @@ export const company = {
   name: 'Reality Computer Software',
   legalName: 'Reality Computer Software SRL',
   shortName: 'RCS',
-  email: 'realitycomputersofware@gmail.com',
+  email: 'realitycomputersoftware@gmail.com',
   phone: '+40726468133',
   phoneDisplay: '+40 726 468 133',
   whatsappUrl: 'https://wa.me/40726468133',
@@ -262,7 +262,7 @@ export const siteContent = {
     },
     siteFlow: {
       name: 'SiteFlow Playbooks',
-      price: '$19.99',
+      price: '$24.99',
       trial: '14-day Pro trial',
       shortcut: 'Ctrl+Shift+Y',
       hero: {
@@ -435,7 +435,7 @@ export const siteContent = {
           },
           {
             title: 'Lifetime Pro',
-            price: '$19.99',
+            price: '$24.99',
             note: 'One-time payment for full access.',
             featured: true,
             points: [
@@ -510,7 +510,7 @@ export const siteContent = {
           {
             title: 'Return and refund policy',
             intro:
-              'SiteFlow Playbooks offers lifetime Pro access for $19.99 through a one-time payment. Requests for returns or refunds can be sent to realitycomputersofware@gmail.com with the purchase email and the relevant order details.',
+              'SiteFlow Playbooks offers lifetime Pro access for $24.99 through a one-time payment. Requests for returns or refunds can be sent to realitycomputersoftware@gmail.com with the purchase email and the relevant order details.',
             points: [
               'We aim to review each request within a reasonable time.',
               'As a launch policy, first-time purchases may request a refund within 14 days of the order date when the request is made in good faith.',
@@ -521,7 +521,7 @@ export const siteContent = {
           {
             title: 'Support and recovery',
             intro:
-              'If you need help with access or license recovery, support requests should be directed to realitycomputersofware@gmail.com.',
+              'If you need help with access or license recovery, support requests should be directed to realitycomputersoftware@gmail.com.',
             points: [
               'License recovery may require the same email address used during purchase.',
               'We may limit support if the product is abused, modified in an unsupported way, or used in connection with unlawful activity.',
@@ -579,7 +579,7 @@ export const siteContent = {
           intro:
             'For general business contact, product questions, or formal notices, please use the contact details below.',
           points: [
-            'Email: realitycomputersofware@gmail.com',
+            'Email: realitycomputersoftware@gmail.com',
             'Phone and WhatsApp: +40 726 468 133',
             'For purchase or access questions, we may ask for order details so we can identify your request.',
           ],
@@ -844,7 +844,7 @@ export const siteContent = {
     },
     siteFlow: {
       name: 'SiteFlow Playbooks',
-      price: '$19.99',
+      price: '$24.99',
       trial: '14 zile de test Pro',
       shortcut: 'Ctrl+Shift+Y',
       hero: {
@@ -1017,7 +1017,7 @@ export const siteContent = {
           },
           {
             title: 'Pro pe viata',
-            price: '$19.99',
+            price: '$24.99',
             note: 'Plata unica pentru acces complet.',
             featured: true,
             points: [
@@ -1092,7 +1092,7 @@ export const siteContent = {
           {
             title: 'Politica de rambursare',
             intro:
-              'SiteFlow Playbooks ofera acces Pro pe viata la pretul de $19.99 printr-o singura plata. Cererile de rambursare pot fi trimise la realitycomputersofware@gmail.com impreuna cu emailul de achizitie si detaliile relevante despre comanda.',
+              'SiteFlow Playbooks ofera acces Pro pe viata la pretul de $24.99 printr-o singura plata. Cererile de rambursare pot fi trimise la realitycomputersoftware@gmail.com impreuna cu emailul de achizitie si detaliile relevante despre comanda.',
             points: [
               'Incercam sa revizuim fiecare solicitare intr-un timp rezonabil.',
               'Ca politica de lansare, prima achizitie poate solicita rambursare in termen de 14 zile de la data comenzii, daca solicitarea este facuta cu buna-credinta.',
@@ -1103,7 +1103,7 @@ export const siteContent = {
           {
             title: 'Asistenta si recuperarea accesului',
             intro:
-              'Daca ai nevoie de ajutor pentru activare sau recuperarea licentei, cererile de asistenta trebuie trimise la realitycomputersofware@gmail.com.',
+              'Daca ai nevoie de ajutor pentru activare sau recuperarea licentei, cererile de asistenta trebuie trimise la realitycomputersoftware@gmail.com.',
             points: [
               'Recuperarea licentei poate necesita acelasi email folosit la achizitie.',
               'Putem limita suportul daca produsul este abuzat, modificat intr-un mod nesuportat sau folosit in legatura cu activitati ilegale.',
@@ -1161,7 +1161,7 @@ export const siteContent = {
           intro:
             'Pentru contact general de business, intrebari despre produse sau notificari formale, foloseste detaliile de mai jos.',
           points: [
-            'Email: realitycomputersofware@gmail.com',
+            'Email: realitycomputersoftware@gmail.com',
             'Telefon si WhatsApp: +40 726 468 133',
             'Pentru intrebari legate de achizitii sau acces la produse, iti putem solicita detalii despre comanda pentru a identifica solicitarea.',
           ],
