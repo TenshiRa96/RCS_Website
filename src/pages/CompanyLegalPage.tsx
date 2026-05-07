@@ -1,18 +1,23 @@
 import { Mail, MapPinned, Phone, ShieldCheck } from 'lucide-react'
-import { useEffect } from 'react'
 import PageTransition from '../components/PageTransition'
 import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import { useLocale } from '../i18n'
 
 export default function CompanyLegalPage() {
-  const { content } = useLocale()
-
-  useEffect(() => {
-    document.title = content.meta.companyLegalTitle
-  }, [content.meta.companyLegalTitle])
+  const { content, locale } = useLocale()
+  const seoDescription =
+    locale === 'ro'
+      ? 'Informatii despre compania Reality Computer Software, date legale, termeni ai website-ului si date de contact.'
+      : 'Company information for Reality Computer Software, including legal details, website terms, and contact information.'
 
   return (
     <PageTransition>
+      <Seo
+        title={content.meta.companyLegalTitle}
+        description={seoDescription}
+        path="/legal"
+      />
       <section className="section inner-hero">
         <Reveal>
           <p className="eyebrow">{content.companyLegal.hero.eyebrow}</p>

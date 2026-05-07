@@ -1,21 +1,34 @@
 import { ArrowRight, BadgeDollarSign, CircleHelp, Mail, ShieldCheck } from 'lucide-react'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import TiltCard from '../components/TiltCard'
 import { company } from '../data/site'
 import { useLocale } from '../i18n'
 
 export default function SiteFlowPricingPage() {
-  const { content } = useLocale()
-
-  useEffect(() => {
-    document.title = content.meta.siteFlowPricingTitle
-  }, [content.meta.siteFlowPricingTitle])
+  const { content, locale } = useLocale()
+  const seoDescription =
+    locale === 'ro'
+      ? 'Preturile SiteFlow Playbooks includ plan gratuit, perioada de test Pro si acces Pro pe viata printr-o singura plata.'
+      : 'SiteFlow Playbooks pricing includes a free plan, a Pro trial, and lifetime Pro access through a one-time payment.'
+  const pricingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: content.meta.siteFlowPricingTitle,
+    url: `${company.siteUrl}/siteflow/pricing`,
+    description: seoDescription,
+  }
 
   return (
     <PageTransition>
+      <Seo
+        title={content.meta.siteFlowPricingTitle}
+        description={seoDescription}
+        path="/siteflow/pricing"
+        schema={pricingSchema}
+      />
       <section className="section inner-hero">
         <Reveal>
           <p className="eyebrow">{content.siteFlow.pricingPage.eyebrow}</p>

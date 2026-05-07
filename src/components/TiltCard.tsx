@@ -5,6 +5,7 @@ import { useState } from 'react'
 type TiltCardProps = {
   children: ReactNode
   className?: string
+  id?: string
 }
 
 type TiltState = {
@@ -21,7 +22,7 @@ const defaultTilt: TiltState = {
   glowY: 50,
 }
 
-export default function TiltCard({ children, className }: TiltCardProps) {
+export default function TiltCard({ children, className, id }: TiltCardProps) {
   const [tilt, setTilt] = useState<TiltState>(defaultTilt)
 
   function handlePointerMove(event: ReactPointerEvent<HTMLDivElement>) {
@@ -48,6 +49,7 @@ export default function TiltCard({ children, className }: TiltCardProps) {
 
   return (
     <motion.div
+      id={id}
       className={`tilt-card${className ? ` ${className}` : ''}`}
       onPointerMove={handlePointerMove}
       onPointerLeave={handleLeave}

@@ -17,6 +17,7 @@ export default function Footer() {
         <div className="footer-column">
           <span className="footer-title">{content.footer.explore}</span>
           <Link to="/">{content.footer.home}</Link>
+          <Link to="/#services">{content.navigation.services}</Link>
           <Link to="/#portfolio">{content.navigation.portfolio}</Link>
           <Link to="/siteflow">SiteFlow Playbooks</Link>
           <Link to="/siteflow/pricing">{content.footer.pricing}</Link>

@@ -1,18 +1,23 @@
 import { BadgeDollarSign, KeyRound, LockKeyhole, ScrollText } from 'lucide-react'
-import { useEffect } from 'react'
 import PageTransition from '../components/PageTransition'
 import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import { useLocale } from '../i18n'
 
 export default function SiteFlowLegalPage() {
-  const { content } = useLocale()
-
-  useEffect(() => {
-    document.title = content.meta.siteFlowLegalTitle
-  }, [content.meta.siteFlowLegalTitle])
+  const { content, locale } = useLocale()
+  const seoDescription =
+    locale === 'ro'
+      ? 'Termenii, politica de confidentialitate si politica de rambursare pentru SiteFlow Playbooks.'
+      : 'Terms, privacy policy, and return information for SiteFlow Playbooks.'
 
   return (
     <PageTransition>
+      <Seo
+        title={content.meta.siteFlowLegalTitle}
+        description={seoDescription}
+        path="/siteflow/legal"
+      />
       <section className="section inner-hero">
         <Reveal>
           <p className="eyebrow">{content.siteFlow.legalPage.hero.eyebrow}</p>

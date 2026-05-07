@@ -1,18 +1,24 @@
 import { ArrowRight } from 'lucide-react'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocale } from '../i18n'
 import PageTransition from '../components/PageTransition'
+import Seo from '../components/Seo'
 
 export default function NotFoundPage() {
-  const { content } = useLocale()
-
-  useEffect(() => {
-    document.title = content.meta.notFoundTitle
-  }, [content.meta.notFoundTitle])
+  const { content, locale } = useLocale()
+  const seoDescription =
+    locale === 'ro'
+      ? 'Pagina cautata nu exista. Revino la website-ul Reality Computer Software.'
+      : 'The page you were looking for does not exist. Return to the Reality Computer Software website.'
 
   return (
     <PageTransition>
+      <Seo
+        title={content.meta.notFoundTitle}
+        description={seoDescription}
+        path="/404"
+        noindex
+      />
       <section className="section not-found">
         <p className="eyebrow">{content.notFound.eyebrow}</p>
         <h1>{content.notFound.title}</h1>

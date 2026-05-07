@@ -1,9 +1,10 @@
-export type Locale = 'en' | 'ro'
+﻿export type Locale = 'en' | 'ro'
 
 export const company = {
   name: 'Reality Computer Software',
   legalName: 'Reality Computer Software SRL',
   shortName: 'RCS',
+  siteUrl: 'https://www.realitysoft.ro',
   email: 'realitycomputersoftware@gmail.com',
   phone: '+40726468133',
   phoneDisplay: '+40 726 468 133',
@@ -16,7 +17,7 @@ export const company = {
 export const siteContent = {
   en: {
     meta: {
-      homeTitle: 'Reality Computer Software | SaaS, Apps & Mobile Games',
+      homeTitle: 'Reality Computer Software | Custom Websites, Apps & Software Products',
       siteFlowTitle: 'SiteFlow Playbooks | Reality Computer Software',
       siteFlowPricingTitle: 'SiteFlow Pricing | Reality Computer Software',
       siteFlowLegalTitle: 'SiteFlow Legal | Reality Computer Software',
@@ -25,6 +26,7 @@ export const siteContent = {
     },
     navigation: {
       studio: 'Studio',
+      services: 'Services',
       portfolio: 'Portfolio',
       contact: 'Contact',
       email: 'Email',
@@ -32,21 +34,65 @@ export const siteContent = {
       language: 'Language',
       english: 'EN',
       romanian: 'RO',
+      menu: 'Menu',
+      openMenu: 'Open menu',
+      closeMenu: 'Close menu',
       homeAria: 'Reality Computer Software home',
       primaryNavigation: 'Primary navigation',
+      servicesMenuAria: 'Services menu',
       portfolioMenuAria: 'Portfolio menu',
-      portfolioOverviewEyebrow: 'Overview',
-      portfolioOverviewTitle: 'Browse the portfolio',
+      servicesOverviewEyebrow: 'What we build',
+      servicesOverviewTitle: 'Choose the kind of project you need',
+      servicesOverviewBody:
+        'From custom websites to tailored apps and launch-ready software products, RCS builds clear digital experiences around real business goals.',
+      serviceMenuItems: [
+        {
+          eyebrow: 'Most requested',
+          title: 'Custom websites',
+          body: 'Company websites, landing pages, and branded pages built to earn trust.',
+          href: '/#services-websites',
+        },
+        {
+          eyebrow: 'Custom build',
+          title: 'Custom apps',
+          body: 'Web-based tools, dashboards, and portals shaped around how a business works.',
+          href: '/#services-apps',
+        },
+        {
+          eyebrow: 'Product launch',
+          title: 'Software products',
+          body: 'Digital products that need structure, clear value, and room to grow.',
+          href: '/#services-products',
+        },
+        {
+          eyebrow: 'Creative direction',
+          title: 'Game concepts',
+          body: 'Early concept development and presentation for interactive and mobile ideas.',
+          href: '/#services-games',
+        },
+      ],
+      portfolioOverviewEyebrow: 'Selected work',
+      portfolioOverviewTitle: 'Browse finished examples',
       portfolioOverviewBody:
-        'See how Reality Computer Software currently presents its product lineup.',
-      horecaEyebrow: 'Hospitality SaaS',
-      horecaBody: 'Operational product site with its own dedicated domain.',
-      siteFlowEyebrow: 'Chrome extension',
-      siteFlowBody: 'Product overview, pricing, and legal information in one place.',
+        'See launched work grouped by the type of service behind it.',
+      portfolioMenuItems: [
+        {
+          eyebrow: 'Websites',
+          title: 'Website examples',
+          body: 'Party Play Club, LaPisici, and Spiritualis.',
+          href: '/#portfolio-websites',
+        },
+        {
+          eyebrow: 'Software',
+          title: 'Apps and products',
+          body: 'Horeca Tracker and SiteFlow Playbooks.',
+          href: '/#portfolio-products',
+        },
+      ],
     },
     footer: {
       brandBody:
-        'Reality Computer Software creates polished software products, from SaaS platforms and apps to browser tools and mobile game concepts.',
+        'Reality Computer Software designs and builds premium digital experiences, from custom websites and tailored apps to launch-ready software products.',
       explore: 'Explore',
       home: 'Home',
       pricing: 'Pricing',
@@ -73,22 +119,22 @@ export const siteContent = {
     home: {
       hero: {
         eyebrow: 'Reality Computer Software',
-        title: 'We build software experiences that look premium and move with purpose.',
+        title: 'Premium websites, custom apps, and software products built with clarity.',
         body:
-          'Reality Computer Software is a studio based in Bucharest, Romania. We create SaaS products, apps, browser tools, and mobile game concepts with a strong focus on clarity, quality, and user experience.',
-        primaryCta: 'Explore portfolio',
+          'Reality Computer Software is a Bucharest studio creating custom websites, tailored digital tools, software products, and selected game concepts with strong design and clear user experience.',
+        primaryCta: 'See our work',
         secondaryCta: 'Explore SiteFlow',
       },
       stats: [
         {
-          value: '02',
-          label: 'Products already mapped',
-          detail: 'A HORECA management product and a browser extension for guided work.',
+          value: '05',
+          label: 'Showcased launches',
+          detail: 'Three client websites and two in-house digital products.',
         },
         {
-          value: '03',
-          label: 'Core tracks',
-          detail: 'SaaS, apps, and mobile-game experiences.',
+          value: '04',
+          label: 'Service tracks',
+          detail: 'Custom websites, apps, software products, and game concepts.',
         },
         {
           value: 'RO',
@@ -125,61 +171,156 @@ export const siteContent = {
         ],
       },
       servicesSection: {
-        eyebrow: 'What RCS builds',
-        title: 'A product studio built for software that needs clarity, identity, and trust.',
+        eyebrow: 'Services',
+        title:
+          'Services organized around what clients are actually looking for.',
         description:
-          'The company story is broad enough for future launches, while staying grounded in the products planned today.',
+          'Whether the need is a custom website, a tailored app, a software product launch, or an early game concept, the work stays polished, clear, and easy to use.',
       },
       services: [
         {
-          title: 'SaaS Products',
+          id: 'websites',
+          title: 'Custom websites',
           description:
-            'Dashboards, web apps, and product ecosystems built for clarity, daily use, and clean scaling.',
-          points: ['Product design systems', 'Multi-page product websites', 'Clear onboarding flows'],
+            'Polished company websites for services, brands, venues, and content businesses that need a strong first impression.',
+          points: [
+            'Company websites and landing pages',
+            'Clear service presentation and contact flow',
+            'Mobile-ready builds with premium visual direction',
+          ],
         },
         {
-          title: 'Apps & Utilities',
+          id: 'apps',
+          title: 'Custom apps',
           description:
-            'Focused desktop, browser, and mobile experiences that make repetitive work faster and easier.',
-          points: ['Workflow simplification', 'Browser product design', 'Performance-first interfaces'],
+            'Web-based tools built around the way a team works, from client portals to internal dashboards and operational flows.',
+          points: [
+            'Dashboards, portals, and internal tools',
+            'Custom user flows and admin areas',
+            'Clear interfaces designed for daily use',
+          ],
         },
         {
-          title: 'Mobile Game Concepts',
+          id: 'products',
+          title: 'Software products',
           description:
-            'Original mobile game ideas with strong visual direction, clear mechanics, and attention to retention.',
-          points: ['Mechanic prototyping', 'Experience direction', 'Launch-ready polish'],
+            'Digital products and SaaS launches that need structure, clear value presentation, and room to grow.',
+          points: [
+            'Product websites and launch pages',
+            'Pricing and legal-ready structure',
+            'Feature presentation built for real users',
+          ],
+        },
+        {
+          id: 'games',
+          title: 'Game concepts',
+          description:
+            'Early-stage concept direction for interactive ideas and mobile-game experiences that are not public yet.',
+          points: [
+            'Concept framing and experience direction',
+            'Visual mood and gameplay positioning',
+            'Private and upcoming work',
+          ],
         },
       ],
       portfolioSection: {
         eyebrow: 'Portfolio',
-        title: 'Two products already define the company portfolio.',
+        title: 'Finished work, grouped by the kind of service behind it.',
         description:
-          'One product lives on its own dedicated domain. The other is fully presented here, together with pricing and legal information.',
+          'Real projects make it easier to understand the type of work RCS delivers, from business websites to launch-ready software products.',
       },
+      portfolioGroups: [
+        {
+          id: 'portfolio-websites',
+          category: 'websites',
+          eyebrow: 'Website examples',
+          title: 'Custom websites for businesses, services, and content brands.',
+          description:
+            'Selected public work built for trust, clarity, and direct action.',
+        },
+        {
+          id: 'portfolio-products',
+          category: 'software',
+          eyebrow: 'Software examples',
+          title: 'Custom software and product launches built for adoption.',
+          description:
+            'Examples of software presentation, launch structure, and product-facing experience.',
+        },
+      ],
       projects: [
         {
+          category: 'websites',
+          title: 'Party Play Club',
+          type: 'Custom website',
+          href: 'https://partyplay.ro',
+          external: true,
+          description:
+            "A lively presentation website for a children's party venue in Bucharest, built to showcase packages, gallery content, and fast booking paths.",
+          tags: ['Local business', 'Events', 'Conversion-focused'],
+          bullets: [
+            'Playful branded interface tailored for parents and families',
+            'Clear package presentation with gallery and contact flows',
+            'Built to support discovery, trust, and direct reservations',
+          ],
+          linkLabel: 'Visit website',
+        },
+        {
+          category: 'websites',
+          title: 'LaPisici',
+          type: 'Service website',
+          href: 'https://lapisici.ro/ro/',
+          external: true,
+          description:
+            'A warm, trust-driven service website for catsitting and pet care in Bucharest and Ilfov, with clear service pages and friendly local positioning.',
+          tags: ['Pet care', 'Local service', 'Bilingual-ready'],
+          bullets: [
+            'Designed around reassurance, clarity, and easy contact',
+            'Structured service presentation with localized routing',
+            'Built for local discovery and direct booking inquiries',
+          ],
+          linkLabel: 'Visit website',
+        },
+        {
+          category: 'websites',
+          title: 'Spiritualis',
+          type: 'Content website',
+          href: 'https://spiritualis.ro',
+          external: true,
+          description:
+            'A content-rich documentary and knowledge platform organized around categories, archives, and topic-based exploration.',
+          tags: ['Content platform', 'Media library', 'Structured navigation'],
+          bullets: [
+            'Large category architecture for browsing and discovery',
+            'Designed to support extensive content growth over time',
+            'Focused on clarity across archive, category, and viewing flows',
+          ],
+          linkLabel: 'Visit website',
+        },
+        {
+          category: 'software',
           title: 'Horeca Tracker',
-          type: 'HORECA SaaS',
+          type: 'Custom software',
           href: 'https://horeca-tracker-six.vercel.app',
           external: true,
           description:
             'A product built for HORECA operators who want a clearer view of daily activity, stock, timing, and business performance.',
-          tags: ['HORECA', 'SaaS', 'Dedicated website'],
+          tags: ['HORECA', 'SaaS', 'Product website'],
           bullets: [
-            'Built as a standalone destination product',
-            'Designed for operational visibility',
-            'Presented here as part of the RCS product portfolio',
+            'Built as a standalone product destination',
+            'Designed to present operational value clearly',
+            'Lives on its own branded domain',
           ],
-          linkLabel: 'Visit product',
+          linkLabel: 'Visit website',
         },
         {
+          category: 'software',
           title: 'SiteFlow Playbooks',
-          type: 'Browser Extension',
+          type: 'Digital product',
           href: '/siteflow',
           external: false,
           description:
             'Context-aware notes, checklists, and reusable text that appear directly on the websites where work gets done.',
-          tags: ['Browser extension', 'Guided work', 'Productivity'],
+          tags: ['Browser extension', 'In-house product', 'Productivity'],
           bullets: [
             'Shows the right guidance on the right site',
             'Offers both quick popup access and an in-page panel',
@@ -189,35 +330,35 @@ export const siteContent = {
         },
       ],
       buildApproach: {
-        eyebrow: 'Build approach',
-        title: 'Built like a product system, not a simple brochure.',
+        eyebrow: 'Process',
+        title: 'A clear build process, not improvised screen by screen.',
         description:
-          'The structure below explains how RCS can present future launches without rebuilding the company website every time.',
+          'Whether the project is a website, a custom tool, or a software product, the work follows a structured path from direction to launch.',
       },
       stages: [
         {
           stage: '01',
-          title: 'Frame the orbit',
+          title: 'Clarify the need',
           description:
-            'Clarify the business case, the audience, and the conversion path before visual flourishes begin.',
+            'Understand the audience, the business goal, and what the project needs to achieve before design starts.',
         },
         {
           stage: '02',
-          title: 'Design the experience',
+          title: 'Shape the direction',
           description:
-            'Shape the interaction, motion, and content system so every screen feels intentional.',
+            'Define the structure, visual language, and user flow so every screen feels intentional.',
         },
         {
           stage: '03',
-          title: 'Launch the product presence',
+          title: 'Build the experience',
           description:
-            'Publish pages that support demos, pricing, legal information, and product discovery.',
+            'Turn the concept into a polished, responsive digital experience ready for real users.',
         },
         {
           stage: '04',
-          title: 'Evolve in public',
+          title: 'Launch and refine',
           description:
-            'Refine the system as products gain users, sharper positioning, and more surface area.',
+            'Publish, test, and keep improving as the project gains users, clarity, and reach.',
         },
       ],
       principlesSection: {
@@ -246,9 +387,9 @@ export const siteContent = {
       ],
       contactSection: {
         eyebrow: 'Contact',
-        title: 'Let’s talk about products, partnerships, or upcoming launches.',
+        title: "Let's talk about a website, an app, or your next digital product.",
         description:
-          'You can reach Reality Computer Software directly for product questions, collaboration, or more information about SiteFlow.',
+          'Reach out directly for a custom website, a tailored app, a software product, or a collaboration idea.',
         email: 'Email',
         whatsapp: 'WhatsApp',
         registryLabels: {
@@ -596,7 +737,7 @@ export const siteContent = {
   },
   ro: {
     meta: {
-      homeTitle: 'Reality Computer Software | SaaS, Aplicatii si Jocuri Mobile',
+      homeTitle: 'Reality Computer Software | Website-uri, Aplicatii si Produse Software',
       siteFlowTitle: 'SiteFlow Playbooks | Reality Computer Software',
       siteFlowPricingTitle: 'Preturi SiteFlow | Reality Computer Software',
       siteFlowLegalTitle: 'Legal SiteFlow | Reality Computer Software',
@@ -605,6 +746,7 @@ export const siteContent = {
     },
     navigation: {
       studio: 'Studio',
+      services: 'Servicii',
       portfolio: 'Portofoliu',
       contact: 'Contact',
       email: 'Email',
@@ -612,22 +754,65 @@ export const siteContent = {
       language: 'Limba',
       english: 'EN',
       romanian: 'RO',
+      menu: 'Meniu',
+      openMenu: 'Deschide meniul',
+      closeMenu: 'Inchide meniul',
       homeAria: 'Acasa Reality Computer Software',
       primaryNavigation: 'Navigatie principala',
+      servicesMenuAria: 'Meniu servicii',
       portfolioMenuAria: 'Meniu portofoliu',
-      portfolioOverviewEyebrow: 'Prezentare',
-      portfolioOverviewTitle: 'Rasfoieste portofoliul',
+      servicesOverviewEyebrow: 'Ce construim',
+      servicesOverviewTitle: 'Alege tipul de proiect de care ai nevoie',
+      servicesOverviewBody:
+        'De la website-uri personalizate la aplicatii create pe nevoia ta si produse software gata de lansare, RCS construieste experiente digitale clare si bine gandite.',
+      serviceMenuItems: [
+        {
+          eyebrow: 'Cea mai ceruta',
+          title: 'Website-uri personalizate',
+          body: 'Website-uri de companie, landing page-uri si pagini de brand construite sa inspire incredere.',
+          href: '/#services-websites',
+        },
+        {
+          eyebrow: 'Construit pe nevoi reale',
+          title: 'Aplicatii personalizate',
+          body: 'Instrumente web, dashboard-uri si portaluri gandite dupa modul in care lucreaza business-ul tau.',
+          href: '/#services-apps',
+        },
+        {
+          eyebrow: 'Lansare de produs',
+          title: 'Produse software',
+          body: 'Produse digitale care au nevoie de structura, claritate si loc pentru crestere.',
+          href: '/#services-products',
+        },
+        {
+          eyebrow: 'Directie creativa',
+          title: 'Concepte de jocuri',
+          body: 'Dezvoltare de concept si prezentare pentru idei interactive si mobile.',
+          href: '/#services-games',
+        },
+      ],
+      portfolioOverviewEyebrow: 'Lucrari selectate',
+      portfolioOverviewTitle: 'Rasfoieste exemple reale',
       portfolioOverviewBody:
-        'Vezi cum isi prezinta Reality Computer Software produsele lansate in acest moment.',
-      horecaEyebrow: 'SaaS pentru HORECA',
-      horecaBody: 'Site de produs operational, cu domeniu dedicat separat.',
-      siteFlowEyebrow: 'Extensie pentru Chrome',
-      siteFlowBody:
-        'Prezentarea produsului, preturile si informatiile legale, in acelasi loc.',
+        'Vezi proiecte lansate, grupate dupa tipul de serviciu din spatele lor.',
+      portfolioMenuItems: [
+        {
+          eyebrow: 'Website-uri',
+          title: 'Exemple de website-uri',
+          body: 'Party Play Club, LaPisici si Spiritualis.',
+          href: '/#portfolio-websites',
+        },
+        {
+          eyebrow: 'Software',
+          title: 'Aplicatii si produse',
+          body: 'Horeca Tracker si SiteFlow Playbooks.',
+          href: '/#portfolio-products',
+        },
+      ],
     },
     footer: {
       brandBody:
-        'Reality Computer Software creeaza produse software bine finisate, de la platforme SaaS si aplicatii pana la instrumente web si concepte de jocuri mobile.',
+        'Reality Computer Software proiecteaza si construieste experiente digitale premium, de la website-uri personalizate si aplicatii pana la produse software gata de lansare.',
       explore: 'Exploreaza',
       home: 'Acasa',
       pricing: 'Preturi',
@@ -654,22 +839,22 @@ export const siteContent = {
     home: {
       hero: {
         eyebrow: 'Reality Computer Software',
-        title: 'Construim produse software cu aspect premium si experiente usor de folosit.',
+        title: 'Website-uri premium, aplicatii personalizate si produse software construite clar.',
         body:
-          'Reality Computer Software este un studio din Bucuresti care creeaza produse SaaS, aplicatii, instrumente web si concepte de jocuri mobile, cu accent pe claritate, calitate si experienta utilizatorului.',
-        primaryCta: 'Exploreaza portofoliul',
+          'Reality Computer Software este un studio din Bucuresti care creeaza website-uri personalizate, instrumente digitale facute pe nevoi reale, produse software si concepte selectate de jocuri, cu accent pe design bun si experienta clara.',
+        primaryCta: 'Vezi lucrarile',
         secondaryCta: 'Exploreaza SiteFlow',
       },
       stats: [
         {
-          value: '02',
-          label: 'Produse deja mapate',
-          detail: 'Un produs pentru HORECA si o extensie care aduce ghidaj direct in paginile web.',
+          value: '05',
+          label: 'Lansari prezentate',
+          detail: 'Trei website-uri realizate pentru clienti si doua produse digitale proprii.',
         },
         {
-          value: '03',
-          label: 'Directii de baza',
-          detail: 'SaaS, aplicatii si experiente de jocuri mobile.',
+          value: '04',
+          label: 'Tipuri de servicii',
+          detail: 'Website-uri personalizate, aplicatii, produse software si concepte de jocuri.',
         },
         {
           value: 'RO',
@@ -706,62 +891,156 @@ export const siteContent = {
         ],
       },
       servicesSection: {
-        eyebrow: 'Ce construieste RCS',
+        eyebrow: 'Servicii',
         title:
-          'Un studio de produs construit pentru software care are nevoie de claritate, identitate si incredere.',
+          'Servicii organizate dupa ce cauta in mod normal un client.',
         description:
-          'Povestea companiei lasa loc lansarilor viitoare, dar ramane ancorata in produsele pregatite acum.',
+          'Fie ca ai nevoie de un website personalizat, de o aplicatie facuta pentru fluxul tau, de un produs software sau de un concept de joc, rezultatul ramane clar, finisat si usor de folosit.',
       },
       services: [
         {
-          title: 'Produse SaaS',
+          id: 'websites',
+          title: 'Website-uri personalizate',
           description:
-            'Panouri de control, aplicatii web si ecosisteme de produs gandite pentru folosire zilnica si crestere sanatoasa.',
-          points: ['Sisteme vizuale de produs', 'Website-uri de produs cu mai multe pagini', 'Parcursuri clare pentru utilizatori'],
+            'Website-uri de companie pentru servicii, branduri, locatii si platforme de continut care au nevoie de o prima impresie puternica.',
+          points: [
+            'Website-uri de companie si landing page-uri',
+            'Prezentare clara a serviciilor si contactului',
+            'Constructie mobile-ready cu directie vizuala premium',
+          ],
         },
         {
-          title: 'Aplicatii si utilitare',
+          id: 'apps',
+          title: 'Aplicatii personalizate',
           description:
-            'Experiente pentru desktop, web si mobil care fac munca repetitiva mai rapida si mai usoara.',
-          points: ['Simplificarea fluxurilor de lucru', 'Design pentru produse web', 'Interfete rapide si clare'],
+            'Instrumente web create dupa modul in care lucreaza o echipa, de la portaluri pentru clienti pana la dashboard-uri si fluxuri operationale.',
+          points: [
+            'Dashboard-uri, portaluri si unelte interne',
+            'Fluxuri de utilizare si zone de administrare personalizate',
+            'Interfete clare pentru folosire zilnica',
+          ],
         },
         {
-          title: 'Concepte de jocuri mobile',
+          id: 'products',
+          title: 'Produse software',
           description:
-            'Idei originale de jocuri mobile cu directie vizuala puternica, mecanici clare si atentie la retentie.',
-          points: ['Prototipare de mecanici', 'Directie de experienta', 'Finisaj gata de lansare'],
+            'Produse digitale si lansari SaaS care au nevoie de structura, prezentare clara si loc pentru crestere.',
+          points: [
+            'Website-uri de produs si pagini de lansare',
+            'Structura pregatita pentru preturi si legal',
+            'Prezentare clara a functionalitatilor pentru utilizatori reali',
+          ],
+        },
+        {
+          id: 'games',
+          title: 'Concepte de jocuri',
+          description:
+            'Directie de concept pentru idei interactive si experiente de joc mobil care nu sunt inca publice.',
+          points: [
+            'Clarificare de concept si directie de experienta',
+            'Mood vizual si pozitionare de gameplay',
+            'Lucru privat si proiecte in dezvoltare',
+          ],
         },
       ],
       portfolioSection: {
         eyebrow: 'Portofoliu',
-        title: 'Doua produse definesc deja portofoliul companiei.',
+        title: 'Lucrari finale, grupate dupa tipul de serviciu din spatele lor.',
         description:
-          'Un produs are propriul website. Celalalt este prezentat aici complet, impreuna cu preturile si informatiile legale.',
+          'Proiectele reale ajuta cel mai bine la intelegerea tipului de lucru pe care il livreaza RCS, de la website-uri pentru business pana la produse software gata de lansare.',
       },
+      portfolioGroups: [
+        {
+          id: 'portfolio-websites',
+          category: 'websites',
+          eyebrow: 'Exemple de website-uri',
+          title: 'Website-uri personalizate pentru business, servicii si continut.',
+          description:
+            'Lucrari publice construite pentru incredere, claritate si actiune directa.',
+        },
+        {
+          id: 'portfolio-products',
+          category: 'software',
+          eyebrow: 'Exemple de software',
+          title: 'Software personalizat si lansari de produs gandite pentru adoptare.',
+          description:
+            'Exemple de prezentare software, structura de lansare si experienta orientata spre utilizator.',
+        },
+      ],
       projects: [
         {
+          category: 'websites',
+          title: 'Party Play Club',
+          type: 'Website personalizat',
+          href: 'https://partyplay.ro',
+          external: true,
+          description:
+            'Un website energic pentru o locatie de petreceri pentru copii din Bucuresti, construit pentru a evidentia pachetele, galeria si rutele rapide de rezervare.',
+          tags: ['Afacere locala', 'Evenimente', 'Orientat spre conversie'],
+          bullets: [
+            'Interfata jucausa adaptata parintilor si familiilor',
+            'Prezentare clara a pachetelor, cu galerie si contact',
+            'Construit pentru descoperire, incredere si rezervari directe',
+          ],
+          linkLabel: 'Viziteaza website-ul',
+        },
+        {
+          category: 'websites',
+          title: 'LaPisici',
+          type: 'Website de servicii',
+          href: 'https://lapisici.ro/ro/',
+          external: true,
+          description:
+            'Un website cald si credibil pentru servicii de catsitting si pet care in Bucuresti si Ilfov, cu pagini clare de servicii si pozitionare locala prietenoasa.',
+          tags: ['Pet care', 'Servicii locale', 'Pregatit pentru doua limbi'],
+          bullets: [
+            'Construit in jurul increderii, claritatii si contactului rapid',
+            'Prezentare structurata a serviciilor, cu rutare localizata',
+            'Gandit pentru descoperire locala si cereri directe de rezervare',
+          ],
+          linkLabel: 'Viziteaza website-ul',
+        },
+        {
+          category: 'websites',
+          title: 'Spiritualis',
+          type: 'Website de continut',
+          href: 'https://spiritualis.ro',
+          external: true,
+          description:
+            'O platforma bogata in documentare si continut tematic, organizata pe categorii, arhive si explorare pe subiecte.',
+          tags: ['Platforma de continut', 'Biblioteca media', 'Navigare structurata'],
+          bullets: [
+            'Arhitectura ampla de categorii pentru navigare si descoperire',
+            'Gandita sa sustina cresterea unui volum mare de continut',
+            'Focus pe claritate intre arhiva, categorii si paginile de vizionare',
+          ],
+          linkLabel: 'Viziteaza website-ul',
+        },
+        {
+          category: 'software',
           title: 'Horeca Tracker',
-          type: 'SaaS pentru HORECA',
+          type: 'Software personalizat',
           href: 'https://horeca-tracker-six.vercel.app',
           external: true,
           description:
             'Un produs gandit pentru operatorii HORECA care vor o imagine mai clara asupra activitatii zilnice, stocurilor, timpilor si rezultatelor.',
-          tags: ['HORECA', 'SaaS', 'Domeniu dedicat'],
+          tags: ['HORECA', 'SaaS', 'Website de produs'],
           bullets: [
             'Construit ca destinatie de produs separata',
-            'Gandit pentru vizibilitate operationala',
-            'Prezentat aici ca parte din portofoliul RCS',
+            'Gandit pentru a prezenta clar valoarea operationala',
+            'Traieste pe propriul domeniu de produs',
           ],
-          linkLabel: 'Viziteaza produsul',
+          linkLabel: 'Viziteaza website-ul',
         },
         {
+          category: 'software',
           title: 'SiteFlow Playbooks',
-          type: 'Extensie pentru Chrome',
+          type: 'Produs digital',
           href: '/siteflow',
           external: false,
           description:
             'Notite contextuale, liste de verificare si texte reutilizabile care apar direct pe site-urile unde se lucreaza.',
-          tags: ['Extensie web', 'Ghidaj contextual', 'Productivitate'],
+          tags: ['Extensie web', 'Produs propriu', 'Productivitate'],
           bullets: [
             'Afiseaza informatia potrivita pe site-ul potrivit',
             'Ofera atat acces rapid, cat si panou lateral in pagina',
@@ -771,35 +1050,35 @@ export const siteContent = {
         },
       ],
       buildApproach: {
-        eyebrow: 'Abordare',
-        title: 'Gandit ca un sistem de produs, nu ca un simplu site de prezentare.',
+        eyebrow: 'Proces',
+        title: 'Un proces clar de constructie, nu ecrane improvizate pe parcurs.',
         description:
-          'Structura de mai jos arata cum poate RCS sa adauge produse noi fara sa reconstruiasca website-ul de fiecare data.',
+          'Fie ca este vorba despre un website, o aplicatie personalizata sau un produs software, proiectul urmeaza un traseu clar de la directie la lansare.',
       },
       stages: [
         {
           stage: '01',
-          title: 'Defineste directia',
+          title: 'Clarifica nevoia',
           description:
-            'Clarifica miza de business, audienta si traseul de conversie inainte sa inceapa artificiile vizuale.',
+            'Intelege publicul, obiectivul de business si ce trebuie sa obtina proiectul inainte sa inceapa designul.',
         },
         {
           stage: '02',
-          title: 'Deseneaza experienta',
+          title: 'Construieste directia',
           description:
-            'Modeleaza interactiunea, miscarea si sistemul de continut astfel incat fiecare ecran sa para intentionat.',
+            'Defineste structura, limbajul vizual si traseul utilizatorului astfel incat fiecare ecran sa para intentionat.',
         },
         {
           stage: '03',
-          title: 'Publica prezenta produsului',
+          title: 'Construieste experienta',
           description:
-            'Livreaza pagini care sustin demonstratii, preturi, informatii legale si descoperirea produsului.',
+            'Transforma conceptul intr-o experienta digitala finisata, responsive si pregatita pentru utilizatori reali.',
         },
         {
           stage: '04',
-          title: 'Evolueaza public',
+          title: 'Lanseaza si rafineaza',
           description:
-            'Rafineaza sistemul pe masura ce produsele castiga utilizatori, pozitionare si suprafata noua.',
+            'Publica, testeaza si imbunatateste pe masura ce proiectul castiga utilizatori, claritate si vizibilitate.',
         },
       ],
       principlesSection: {
@@ -828,9 +1107,9 @@ export const siteContent = {
       ],
       contactSection: {
         eyebrow: 'Contact',
-        title: 'Hai sa vorbim despre produse, parteneriate sau lansari viitoare.',
+        title: 'Hai sa vorbim despre un website, o aplicatie sau urmatorul tau produs digital.',
         description:
-          'Ne poti contacta direct pentru intrebari despre produse, colaborari sau mai multe detalii despre SiteFlow.',
+          'Scrie-ne direct pentru un website personalizat, o aplicatie facuta pe nevoia ta, un produs software sau o idee de colaborare.',
         email: 'Email',
         whatsapp: 'WhatsApp',
         registryLabels: {
@@ -1179,3 +1458,4 @@ export const siteContent = {
 } as const
 
 export type SiteContent = (typeof siteContent)[Locale]
+

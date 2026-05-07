@@ -7,23 +7,47 @@ import {
   NotebookPen,
   PanelsTopLeft,
 } from 'lucide-react'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import SectionHeading from '../components/SectionHeading'
 import TiltCard from '../components/TiltCard'
+import { company } from '../data/site'
 import { useLocale } from '../i18n'
 
 export default function SiteFlowPage() {
-  const { content } = useLocale()
-
-  useEffect(() => {
-    document.title = content.meta.siteFlowTitle
-  }, [content.meta.siteFlowTitle])
+  const { content, locale } = useLocale()
+  const seoDescription =
+    locale === 'ro'
+      ? 'SiteFlow Playbooks este o extensie pentru Chrome care afiseaza notite, liste de verificare si texte reutilizabile exact pe site-urile unde lucrezi.'
+      : 'SiteFlow Playbooks is a Chrome extension that shows notes, checklists, and reusable text directly on the websites where work happens.'
+  const siteFlowSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: content.siteFlow.name,
+    applicationCategory: 'BrowserApplication',
+    operatingSystem: 'Chrome',
+    offers: {
+      '@type': 'Offer',
+      price: '24.99',
+      priceCurrency: 'USD',
+      availability: 'https://schema.org/InStock',
+    },
+    description: seoDescription,
+    url: `${company.siteUrl}/siteflow`,
+    inLanguage: locale,
+  }
 
   return (
     <PageTransition>
+      <Seo
+        title={content.meta.siteFlowTitle}
+        description={seoDescription}
+        path="/siteflow"
+        type="product"
+        schema={siteFlowSchema}
+      />
       <section className="section inner-hero">
         <div className="hero-grid">
           <Reveal className="hero-copy">

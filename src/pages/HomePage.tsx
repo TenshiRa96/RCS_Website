@@ -1,33 +1,61 @@
 import {
   ArrowRight,
   ArrowUpRight,
-  Gamepad2,
   Globe,
   Layers3,
-  MonitorSmartphone,
   PanelsTopLeft,
   Phone,
   Rocket,
   Sparkles,
 } from 'lucide-react'
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
 import Reveal from '../components/Reveal'
+import Seo from '../components/Seo'
 import SectionHeading from '../components/SectionHeading'
 import TiltCard from '../components/TiltCard'
 import { company } from '../data/site'
 import { useLocale } from '../i18n'
 
 export default function HomePage() {
-  const { content } = useLocale()
-
-  useEffect(() => {
-    document.title = content.meta.homeTitle
-  }, [content.meta.homeTitle])
+  const { content, locale } = useLocale()
+  const serviceIcons = [Globe, PanelsTopLeft, Layers3, Rocket]
+  const seoDescription =
+    locale === 'ro'
+      ? 'Reality Computer Software creeaza website-uri personalizate, aplicatii si produse software cu design premium, structura clara si experienta buna pe mobil si desktop.'
+      : 'Reality Computer Software builds custom websites, apps, and software products with premium design, clear structure, and polished mobile and desktop experience.'
+  const homeSchema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: company.legalName,
+      url: company.siteUrl,
+      email: company.email,
+      telephone: company.phoneDisplay,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Aleea Campul cu Flori 14',
+        addressLocality: 'Bucuresti',
+        addressCountry: 'RO',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: company.name,
+      url: company.siteUrl,
+      inLanguage: locale,
+    },
+  ]
 
   return (
     <PageTransition>
+      <Seo
+        title={content.meta.homeTitle}
+        description={seoDescription}
+        path="/"
+        schema={homeSchema}
+      />
       <section className="section hero-section">
         <div className="hero-grid">
           <Reveal className="hero-copy">
@@ -116,7 +144,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section" id="services">
         <Reveal>
           <SectionHeading
             eyebrow={content.home.servicesSection.eyebrow}
@@ -125,13 +153,17 @@ export default function HomePage() {
           />
         </Reveal>
 
-        <div className="card-grid card-grid--three">
+        <div className="card-grid card-grid--services">
           {content.home.services.map((service, index) => {
-            const Icon = [MonitorSmartphone, Globe, Gamepad2][index]
+            const Icon = serviceIcons[index]
 
             return (
-              <Reveal key={service.title} delay={index * 0.06}>
-                <TiltCard className="feature-panel">
+              <Reveal
+                key={service.title}
+                className="grid-reveal"
+                delay={index * 0.06}
+              >
+                <TiltCard className="feature-panel" id={`services-${service.id}`}>
                   <div className="panel-icon">
                     <Icon size={22} />
                   </div>
@@ -158,44 +190,73 @@ export default function HomePage() {
           />
         </Reveal>
 
-        <div className="card-grid card-grid--portfolio">
-          {content.home.projects.map((project, index) => (
-            <Reveal key={project.title} delay={index * 0.08}>
-              <TiltCard className="portfolio-panel">
-                <div className="project-meta">
-                  <span className="project-type">{project.type}</span>
-                  <div className="tag-row">
-                    {project.tags.map((tag) => (
-                      <span key={tag} className="tag">
-                        {tag}
-                      </span>
-                    ))}
+        <div className="portfolio-stack">
+          {content.home.portfolioGroups.map((group, groupIndex) => {
+            const projects = content.home.projects.filter(
+              (project) => project.category === group.category,
+            )
+
+            return (
+              <div key={group.id} id={group.id} className="portfolio-group">
+                <Reveal delay={groupIndex * 0.06}>
+                  <div className="portfolio-subhead">
+                    <span className="project-type">{group.eyebrow}</span>
+                    <h3>{group.title}</h3>
+                    <p>{group.description}</p>
                   </div>
-                </div>
+                </Reveal>
 
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
+                <div className="card-grid card-grid--portfolio portfolio-group__grid">
+                  {projects.map((project, index) => (
+                    <Reveal
+                      key={project.title}
+                      className="grid-reveal"
+                      delay={index * 0.06}
+                    >
+                      <TiltCard className="portfolio-panel">
+                        <div className="project-meta">
+                          <span className="project-type">{project.type}</span>
+                          <div className="tag-row">
+                            {project.tags.map((tag) => (
+                              <span key={tag} className="tag">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
 
-                <ul className="bullet-list">
-                  {project.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
+                        <h3>{project.title}</h3>
+                        <p>{project.description}</p>
+
+                        <ul className="bullet-list">
+                          {project.bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                          ))}
+                        </ul>
+
+                        {project.external ? (
+                          <a
+                            className="text-link"
+                            href={project.href}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {project.linkLabel}
+                            <ArrowUpRight size={16} />
+                          </a>
+                        ) : (
+                          <Link className="text-link" to={project.href}>
+                            {project.linkLabel}
+                            <ArrowRight size={16} />
+                          </Link>
+                        )}
+                      </TiltCard>
+                    </Reveal>
                   ))}
-                </ul>
-
-                {project.external ? (
-                  <a className="text-link" href={project.href} target="_blank" rel="noreferrer">
-                    {project.linkLabel}
-                    <ArrowUpRight size={16} />
-                  </a>
-                ) : (
-                  <Link className="text-link" to={project.href}>
-                    {project.linkLabel}
-                    <ArrowRight size={16} />
-                  </Link>
-                )}
-              </TiltCard>
-            </Reveal>
-          ))}
+                </div>
+              </div>
+            )
+          })}
         </div>
       </section>
 
@@ -211,7 +272,7 @@ export default function HomePage() {
 
         <div className="stage-grid">
           {content.home.stages.map((stage, index) => (
-            <Reveal key={stage.stage} delay={index * 0.05}>
+            <Reveal key={stage.stage} className="grid-reveal" delay={index * 0.05}>
               <div className="stage-card">
                 <span className="stage-index">{stage.stage}</span>
                 <h3>{stage.title}</h3>
@@ -233,7 +294,7 @@ export default function HomePage() {
 
         <div className="card-grid card-grid--three">
           {content.home.principles.map((principle, index) => (
-            <Reveal key={principle.title} delay={index * 0.06}>
+            <Reveal key={principle.title} className="grid-reveal" delay={index * 0.06}>
               <TiltCard className="principle-panel">
                 <div className="panel-icon">
                   <Sparkles size={22} />
