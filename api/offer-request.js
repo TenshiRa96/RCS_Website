@@ -16,6 +16,26 @@ function getRequiredEnv(name) {
   return value
 }
 
+function toPublicErrorMessage(error) {
+  if (error instanceof Error && error.message.startsWith('Missing environment variable:')) {
+    return 'Email service is not configured correctly on the server.'
+  }
+
+  const errorCode = typeof error === 'object' && error && 'code' in error ? error.code : ''
+  const responseCode =
+    typeof error === 'object' && error && 'responseCode' in error ? error.responseCode : undefined
+
+  if (errorCode === 'EAUTH' || responseCode === 535) {
+    return 'Email authentication failed. Check the Gmail app password.'
+  }
+
+  if (errorCode === 'ETIMEDOUT' || errorCode === 'ESOCKET' || errorCode === 'ECONNECTION') {
+    return 'The email server could not be reached. Please try again shortly.'
+  }
+
+  return 'Failed to send offer request.'
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll('&', '&amp;')
@@ -51,7 +71,7 @@ export default async function handler(request, response) {
     const smtpPort = Number(process.env.SMTP_PORT ?? 465)
     const smtpSecure = (process.env.SMTP_SECURE ?? 'true') !== 'false'
     const smtpUser = getRequiredEnv('SMTP_USER')
-    const smtpPass = getRequiredEnv('SMTP_PASS')
+    const smtpPass = getRequiredEnv('SMTP_PASS').replaceAll(' ', '')
     const offerToEmail = process.env.OFFER_TO_EMAIL || smtpUser
     const offerFromEmail = process.env.OFFER_FROM_EMAIL || smtpUser
 
@@ -64,6 +84,8 @@ export default async function handler(request, response) {
         pass: smtpPass,
       },
     })
+
+    await transporter.verify()
 
     await transporter.sendMail({
       from: `"Realitysoft Website" <${offerFromEmail}>`,
@@ -107,6 +129,6 @@ export default async function handler(request, response) {
     return json(response, 200, { ok: true })
   } catch (error) {
     console.error('Offer request send failed', error)
-    return json(response, 500, { ok: false, error: 'Failed to send offer request' })
+    return json(response, 500, { ok: false, error: toPublicErrorMessage(error) })
   }
 }

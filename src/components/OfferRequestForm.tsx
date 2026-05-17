@@ -42,6 +42,7 @@ export default function OfferRequestForm({
 }: OfferRequestFormProps) {
   const { locale } = useLocale()
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
+  const [submitError, setSubmitError] = useState('')
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -59,6 +60,7 @@ export default function OfferRequestForm({
     }
 
     setSubmitState('sending')
+    setSubmitError('')
 
     try {
       const response = await fetch('/api/offer-request', {
@@ -70,11 +72,17 @@ export default function OfferRequestForm({
         body: JSON.stringify(payload),
       })
 
+      const result = await response.json().catch(() => null)
+
       if (!response.ok) {
+        if (result && typeof result.error === 'string') {
+          setSubmitError(result.error)
+        }
         throw new Error('Offer request failed')
       }
 
       setSubmitState('success')
+      setSubmitError('')
       form.reset()
     } catch {
       setSubmitState('error')
@@ -188,7 +196,9 @@ export default function OfferRequestForm({
 
       <div className="offer-form__status" aria-live="polite">
         {submitState === 'success' ? <p className="offer-form__success">{content.successMessage}</p> : null}
-        {submitState === 'error' ? <p className="offer-form__error">{content.errorMessage}</p> : null}
+        {submitState === 'error' ? (
+          <p className="offer-form__error">{submitError || content.errorMessage}</p>
+        ) : null}
       </div>
     </form>
   )
