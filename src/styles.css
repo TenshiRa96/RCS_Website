@@ -739,7 +739,7 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
   gap: 34px;
-  align-items: center;
+  align-items: start;
 }
 
 .hero-copy,
@@ -898,7 +898,7 @@ p {
   position: relative;
   min-height: 640px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
