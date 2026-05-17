@@ -896,7 +896,7 @@ p {
 
 .hero-observatory {
   position: relative;
-  min-height: 640px;
+  min-height: 560px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1159,6 +1159,10 @@ p {
   gap: 18px;
 }
 
+.offer-form--compact {
+  margin-top: 0;
+}
+
 .offer-form__copy {
   display: grid;
   gap: 8px;
@@ -1293,6 +1297,82 @@ p {
   color: #ffe0de;
   background: rgba(255, 112, 112, 0.12);
   border: 1px solid rgba(255, 112, 112, 0.18);
+}
+
+.section--offer-request {
+  padding-top: 20px;
+}
+
+.offer-request-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.86fr) minmax(0, 1.14fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.offer-request-panel,
+.offer-request-form-shell {
+  padding: 28px;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)),
+    var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.offer-request-panel {
+  display: grid;
+  gap: 22px;
+}
+
+.offer-request-panel h2 {
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+}
+
+.offer-tag-row--request {
+  margin-top: 0;
+}
+
+.offer-request-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.offer-request-stat {
+  padding: 18px;
+  display: grid;
+  gap: 8px;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 178, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.offer-request-stat strong {
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.offer-request-stat span {
+  color: #dbe6ff;
+  font-weight: 600;
+}
+
+.offer-request-stat p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.offer-request-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.offer-request-actions .button {
+  flex: 1 1 200px;
 }
 
 .section-heading {
@@ -2033,6 +2113,7 @@ p {
   }
 
   .hero-grid,
+  .offer-request-layout,
   .card-grid--three,
   .card-grid--pricing,
   .legal-grid,
@@ -2232,6 +2313,7 @@ p {
   .card-grid--services,
   .card-grid--two,
   .stat-grid,
+  .offer-request-stats,
   .registry-grid,
   .footer-panel {
     grid-template-columns: 1fr;
@@ -2335,6 +2417,8 @@ p {
   .footer-panel,
   .comparison-panel,
   .contact-panel,
+  .offer-request-panel,
+  .offer-request-form-shell,
   .legal-block,
   .stage-card,
   .mini-panel,

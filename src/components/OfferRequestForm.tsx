@@ -30,11 +30,15 @@ type OfferRequestFormContent = {
 
 type OfferRequestFormProps = {
   content: OfferRequestFormContent
+  showIntro?: boolean
 }
 
 type SubmitState = 'idle' | 'sending' | 'success' | 'error'
 
-export default function OfferRequestForm({ content }: OfferRequestFormProps) {
+export default function OfferRequestForm({
+  content,
+  showIntro = true,
+}: OfferRequestFormProps) {
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -49,6 +53,10 @@ export default function OfferRequestForm({ content }: OfferRequestFormProps) {
 
     if (typeof replyTo === 'string' && replyTo.length > 0) {
       formData.append('_replyto', replyTo)
+    }
+
+    if (typeof window !== 'undefined') {
+      formData.append('_url', window.location.href)
     }
 
     setSubmitState('sending')
@@ -74,12 +82,14 @@ export default function OfferRequestForm({ content }: OfferRequestFormProps) {
   }
 
   return (
-    <form className="offer-form" onSubmit={handleSubmit}>
-      <div className="offer-form__copy">
-        <span className="offer-form__eyebrow">{content.eyebrow}</span>
-        <h3>{content.title}</h3>
-        <p>{content.description}</p>
-      </div>
+    <form className={`offer-form${showIntro ? '' : ' offer-form--compact'}`} onSubmit={handleSubmit}>
+      {showIntro ? (
+        <div className="offer-form__copy">
+          <span className="offer-form__eyebrow">{content.eyebrow}</span>
+          <h3>{content.title}</h3>
+          <p>{content.description}</p>
+        </div>
+      ) : null}
 
       <div className="offer-form__grid">
         <label className="offer-field">

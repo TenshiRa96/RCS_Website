@@ -3,6 +3,7 @@ import {
   ArrowUpRight,
   Globe,
   Layers3,
+  Mail,
   PanelsTopLeft,
   Phone,
   Rocket,
@@ -108,7 +109,7 @@ export default function HomePage() {
             <p className="lede">{content.home.hero.body}</p>
 
             <div className="cta-row">
-              <Link className="button button--primary" to="/#website-offer">
+              <Link className="button button--primary" to="/#website-offer-request">
                 {content.home.hero.primaryCta}
                 <ArrowRight size={18} />
               </Link>
@@ -188,10 +189,57 @@ export default function HomePage() {
 
                   <p className="offer-footnote">{content.home.websiteOffer.priceNote}</p>
 
-                  <OfferRequestForm content={content.home.offerForm} />
                 </div>
               </TiltCard>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--offer-request" id="website-offer-request">
+        <div className="offer-request-layout">
+          <Reveal className="offer-request-panel">
+            <p className="eyebrow">{content.home.offerForm.eyebrow}</p>
+            <h2>{content.home.offerForm.title}</h2>
+            <p className="section-copy">{content.home.offerForm.description}</p>
+
+            <div className="offer-tag-row offer-tag-row--request">
+              {content.home.websiteOffer.tags.map((tag) => (
+                <span key={tag} className="tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="offer-request-stats">
+              {content.home.stats.map((stat) => (
+                <div key={stat.label} className="offer-request-stat">
+                  <strong>{stat.value}</strong>
+                  <span>{stat.label}</span>
+                  <p>{stat.detail}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="offer-request-actions">
+              <a className="button button--primary button--small" href={`mailto:${company.email}`}>
+                {content.home.offerForm.directEmail}
+                <Mail size={18} />
+              </a>
+              <a
+                className="button button--ghost button--small"
+                href={company.whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {content.home.contactSection.whatsapp}
+                <Phone size={18} />
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal className="offer-request-form-shell" delay={0.08}>
+            <OfferRequestForm content={content.home.offerForm} showIntro={false} />
           </Reveal>
         </div>
       </section>
@@ -231,7 +279,7 @@ export default function HomePage() {
                     ))}
                   </ul>
                   {'ctaLabel' in service ? (
-                    <Link className="text-link service-cta" to="/#website-offer">
+                    <Link className="text-link service-cta" to="/#website-offer-request">
                       {service.ctaLabel}
                       <ArrowRight size={16} />
                     </Link>
