@@ -10,6 +10,7 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import PageTransition from '../components/PageTransition'
+import OfferRequestForm from '../components/OfferRequestForm'
 import Reveal from '../components/Reveal'
 import Seo from '../components/Seo'
 import SectionHeading from '../components/SectionHeading'
@@ -20,10 +21,11 @@ import { useLocale } from '../i18n'
 export default function HomePage() {
   const { content, locale } = useLocale()
   const serviceIcons = [Globe, PanelsTopLeft, Layers3, Rocket]
+  const websiteOfferIcons = [Globe, PanelsTopLeft, Sparkles]
   const seoDescription =
     locale === 'ro'
-      ? 'Reality Computer Software creeaza website-uri personalizate, aplicatii si produse software cu design premium, structura clara si experienta buna pe mobil si desktop.'
-      : 'Reality Computer Software builds custom websites, apps, and software products with premium design, clear structure, and polished mobile and desktop experience.'
+      ? 'Reality Computer Software creeaza website-uri personalizate, magazine de prezentare si aplicatii web, cu preturi de pornire de la 500 EUR si accent pe design premium, mobil si SEO.'
+      : 'Reality Computer Software builds custom websites, presentation sites, and web apps starting from 500 EUR, with premium design, mobile readiness, and SEO-friendly structure.'
   const homeSchema = [
     {
       '@context': 'https://schema.org',
@@ -46,6 +48,48 @@ export default function HomePage() {
       url: company.siteUrl,
       inLanguage: locale,
     },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: company.legalName,
+      url: company.siteUrl,
+      email: company.email,
+      telephone: company.phoneDisplay,
+      priceRange: '€500+',
+      areaServed: 'RO',
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: locale === 'ro' ? 'Servicii principale' : 'Primary services',
+        itemListElement: [
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: locale === 'ro' ? 'Website-uri personalizate' : 'Custom websites',
+            },
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              priceCurrency: 'EUR',
+              minPrice: 500,
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: locale === 'ro' ? 'Aplicatii personalizate' : 'Custom apps',
+            },
+          },
+          {
+            '@type': 'Offer',
+            itemOffered: {
+              '@type': 'Service',
+              name: locale === 'ro' ? 'Produse software' : 'Software products',
+            },
+          },
+        ],
+      },
+    },
   ]
 
   return (
@@ -64,13 +108,13 @@ export default function HomePage() {
             <p className="lede">{content.home.hero.body}</p>
 
             <div className="cta-row">
-              <Link className="button button--primary" to="/#portfolio">
+              <Link className="button button--primary" to="/#website-offer">
                 {content.home.hero.primaryCta}
                 <ArrowRight size={18} />
               </Link>
-              <Link className="button button--ghost" to="/siteflow">
+              <Link className="button button--ghost" to="/#portfolio-websites">
                 {content.home.hero.secondaryCta}
-                <ArrowUpRight size={18} />
+                <ArrowRight size={18} />
               </Link>
             </div>
 
@@ -86,7 +130,7 @@ export default function HomePage() {
           </Reveal>
 
           <Reveal className="hero-visual" delay={0.12}>
-            <div className="hero-observatory">
+            <div className="hero-observatory" id="website-offer">
               <div className="observatory-ring observatory-ring--one" />
               <div className="observatory-ring observatory-ring--two" />
 
@@ -101,42 +145,50 @@ export default function HomePage() {
               ))}
 
               <TiltCard className="observatory-shell">
-                <div className="observatory-console">
+                <div className="observatory-console offer-console">
                   <div className="panel-topline">
-                    <span>{content.home.observatory.toplineLeft}</span>
-                    <span>{content.home.observatory.toplineRight}</span>
+                    <span>{content.home.websiteOffer.toplineLeft}</span>
+                    <span>{content.home.websiteOffer.toplineRight}</span>
                   </div>
 
-                  <div className="observatory-core">
-                    <div className="observatory-emblem">
-                      <div className="pulse pulse--one" />
-                      <div className="pulse pulse--two" />
-                      <div className="core-badge">RCS</div>
+                  <div className="offer-summary">
+                    <div className="offer-price-badge">
+                      <span>{content.home.websiteOffer.priceLabel}</span>
+                      <strong>{content.home.websiteOffer.priceValue}</strong>
                     </div>
 
-                    <div className="observatory-copy">
-                      <h2>{content.home.observatory.title}</h2>
-                      <p>{content.home.observatory.body}</p>
+                    <div className="observatory-copy offer-copy">
+                      <h2>{content.home.websiteOffer.title}</h2>
+                      <p>{content.home.websiteOffer.body}</p>
                     </div>
                   </div>
 
-                  <div className="signal-grid">
-                    <div className="signal-card">
-                      <Layers3 size={18} />
-                      <strong>{content.home.observatory.signals[0].title}</strong>
-                      <span>{content.home.observatory.signals[0].body}</span>
-                    </div>
-                    <div className="signal-card">
-                      <PanelsTopLeft size={18} />
-                      <strong>{content.home.observatory.signals[1].title}</strong>
-                      <span>{content.home.observatory.signals[1].body}</span>
-                    </div>
-                    <div className="signal-card">
-                      <Rocket size={18} />
-                      <strong>{content.home.observatory.signals[2].title}</strong>
-                      <span>{content.home.observatory.signals[2].body}</span>
-                    </div>
+                  <div className="offer-tag-row">
+                    {content.home.websiteOffer.tags.map((tag) => (
+                      <span key={tag} className="tag">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
+
+                  <div className="signal-grid" id="website-pricing">
+                    {content.home.websiteOffer.pricing.map((item, index) => {
+                      const Icon = websiteOfferIcons[index]
+
+                      return (
+                        <div key={item.title} className="signal-card price-card">
+                          <Icon size={18} />
+                          <strong>{item.title}</strong>
+                          <span className="price-card__value">{item.price}</span>
+                          <span>{item.body}</span>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  <p className="offer-footnote">{content.home.websiteOffer.priceNote}</p>
+
+                  <OfferRequestForm content={content.home.offerForm} />
                 </div>
               </TiltCard>
             </div>
@@ -163,10 +215,14 @@ export default function HomePage() {
                 className="grid-reveal"
                 delay={index * 0.06}
               >
-                <TiltCard className="feature-panel" id={`services-${service.id}`}>
+                <TiltCard
+                  className={`feature-panel${'featured' in service && service.featured ? ' feature-panel--featured' : ''}`}
+                  id={`services-${service.id}`}
+                >
                   <div className="panel-icon">
                     <Icon size={22} />
                   </div>
+                  {'priceFrom' in service ? <span className="service-price">{service.priceFrom}</span> : null}
                   <h3>{service.title}</h3>
                   <p>{service.description}</p>
                   <ul className="bullet-list">
@@ -174,6 +230,12 @@ export default function HomePage() {
                       <li key={point}>{point}</li>
                     ))}
                   </ul>
+                  {'ctaLabel' in service ? (
+                    <Link className="text-link service-cta" to="/#website-offer">
+                      {service.ctaLabel}
+                      <ArrowRight size={16} />
+                    </Link>
+                  ) : null}
                 </TiltCard>
               </Reveal>
             )

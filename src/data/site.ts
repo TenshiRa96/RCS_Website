@@ -119,75 +119,85 @@ export const siteContent = {
     home: {
       hero: {
         eyebrow: 'Reality Computer Software',
-        title: 'Premium websites, custom apps, and software products built with clarity.',
+        title: 'Custom websites that look premium and help people contact you faster.',
         body:
-          'Reality Computer Software is a Bucharest studio creating custom websites, tailored digital tools, software products, and selected game concepts with strong design and clear user experience.',
-        primaryCta: 'See our work',
-        secondaryCta: 'Explore SiteFlow',
+          'Reality Computer Software builds presentation websites, business websites, and custom digital experiences for brands that need trust, clarity, and a polished online presence.',
+        primaryCta: 'Request a website offer',
+        secondaryCta: 'See website examples',
       },
       stats: [
         {
-          value: '05',
-          label: 'Showcased launches',
-          detail: 'Three client websites and two in-house digital products.',
+          value: '€500+',
+          label: 'Website projects start here',
+          detail: 'A presentation website can start from 500 EUR, depending on scope.',
         },
         {
-          value: '04',
-          label: 'Service tracks',
-          detail: 'Custom websites, apps, software products, and game concepts.',
+          value: '03',
+          label: 'Public website examples',
+          detail: 'partyplay.ro, lapisici.ro, and spiritualis.ro are already live.',
         },
         {
-          value: 'RO',
-          label: 'Built from Bucharest',
-          detail: 'Romanian studio with an international product mindset.',
+          value: 'Mobile',
+          label: 'Ready on every screen',
+          detail: 'Layouts are built to look clear and professional on desktop and phone.',
         },
       ],
       orbitSignals: [
-        { label: 'SaaS systems', top: '6%', left: '18%' },
-        { label: 'Mobile apps', top: '20%', left: '74%' },
-        { label: 'Game concepts', top: '58%', left: '82%' },
-        { label: 'Automation', top: '78%', left: '18%' },
-        { label: 'Browser tools', top: '48%', left: '4%' },
+        { label: 'Presentation websites', top: '6%', left: '16%' },
+        { label: 'Service websites', top: '22%', left: '72%' },
+        { label: 'Booking and forms', top: '56%', left: '80%' },
+        { label: 'Bilingual pages', top: '78%', left: '18%' },
+        { label: 'SEO-ready structure', top: '48%', left: '2%' },
       ],
-      observatory: {
-        toplineLeft: 'RCS overview',
-        toplineRight: 'Status: growing the constellation',
-        title: 'Clear products, premium presentation.',
+      websiteOffer: {
+        toplineLeft: 'Most requested service',
+        toplineRight: 'Website offers',
+        priceLabel: 'Starting from',
+        priceValue: '500 EUR',
+        title: 'A serious website for your business should be easy to understand and easy to trust.',
         body:
-          'The visual direction combines a confident product feel with a space-inspired atmosphere, so the site feels memorable without losing clarity.',
-        signals: [
+          'Ideal for local businesses, service brands, venues, consultants, and growing companies that need a premium online presence and a clear contact path.',
+        tags: ['Premium design', 'Mobile-ready', 'SEO-friendly structure'],
+        pricing: [
           {
-            title: 'Well-structured portfolio',
-            body: 'Company, product, pricing, and legal pages are clearly connected.',
+            title: 'Presentation website',
+            price: 'from 500 EUR',
+            body: 'For a clean company page, a landing page, or a small service website.',
           },
           {
-            title: 'Complete product presence',
-            body: 'SiteFlow already has dedicated presentation, pricing, and legal pages.',
+            title: 'Business website',
+            price: 'from 900 EUR',
+            body: 'For multi-section websites with stronger structure, portfolio, and lead flow.',
           },
           {
-            title: 'Ready for growth',
-            body: 'The structure is prepared for future products without needing a full redesign.',
+            title: 'Custom functionality',
+            price: 'Custom quote',
+            body: 'For bookings, advanced forms, client areas, integrations, or tailored logic.',
           },
         ],
+        priceNote:
+          'The final price depends on the number of pages, design direction, languages, integrations, and the exact functionality your website needs.',
       },
       servicesSection: {
         eyebrow: 'Services',
-        title:
-          'Services organized around what clients are actually looking for.',
+        title: 'Custom websites come first. Extra software is added only when the project needs it.',
         description:
-          'Whether the need is a custom website, a tailored app, a software product launch, or an early game concept, the work stays polished, clear, and easy to use.',
+          'If you need a serious company website, that is the main focus. Apps, software products, and other custom builds come in when the business really needs more than a presentation site.',
       },
       services: [
         {
           id: 'websites',
           title: 'Custom websites',
           description:
-            'Polished company websites for services, brands, venues, and content businesses that need a strong first impression.',
+            'Company websites, service websites, and launch pages built to look professional, explain the offer clearly, and turn visitors into real inquiries.',
+          featured: true,
+          priceFrom: 'Starting from 500 EUR',
           points: [
-            'Company websites and landing pages',
-            'Clear service presentation and contact flow',
-            'Mobile-ready builds with premium visual direction',
+            'Presentation websites, business websites, and branded landing pages',
+            'Clear structure, trust-building copy, and direct contact flow',
+            'Responsive build for desktop and mobile',
           ],
+          ctaLabel: 'Request a website offer',
         },
         {
           id: 'apps',
@@ -300,7 +310,7 @@ export const siteContent = {
           category: 'software',
           title: 'Horeca Tracker',
           type: 'Custom software',
-          href: 'https://horeca-tracker-six.vercel.app',
+          href: 'https://horeca-tracker.realitysoft.ro',
           external: true,
           description:
             'A product built for HORECA operators who want a clearer view of daily activity, stock, timing, and business performance.',
@@ -362,34 +372,67 @@ export const siteContent = {
         },
       ],
       principlesSection: {
-        eyebrow: 'Why this presentation works',
-        title:
-          'The visual language reaches for a premium feel, but the structure stays commercially useful.',
+        eyebrow: 'What clients usually care about',
+        title: 'A good website should help your business look clearer, stronger, and easier to contact.',
         description:
-          'Motion, depth, and atmosphere are used to support the message: RCS builds serious software with personality.',
+          'The visual side matters, but clients also need speed, clarity, mobile usability, and a structure that helps people take action.',
       },
       principles: [
         {
-          title: 'Signal Before Noise',
+          title: 'Clear service presentation',
           description:
-            'Strong visual systems, clean hierarchy, and motion that explains instead of distracting.',
+            'Visitors should understand what you offer, who you help, and how to contact you without effort.',
         },
         {
-          title: 'Product-Led Storytelling',
+          title: 'Premium first impression',
           description:
-            'Every section is written to clarify what the product does, who it helps, and why it matters now.',
+            'The website should feel serious, current, and memorable from the first screen.',
         },
         {
-          title: 'Solid Launch Foundations',
+          title: 'Room to grow later',
           description:
-            'Routing, legal information, contact paths, and pricing pages are ready for a real-world launch.',
+            'A strong structure makes it easier to add new pages, languages, services, or features over time.',
         },
       ],
+      offerForm: {
+        eyebrow: 'Request an offer',
+        title: 'Tell us what kind of website you need.',
+        description:
+          'Send a short brief and receive a tailored estimate based on your pages, design direction, and required functionality.',
+        nameLabel: 'Name',
+        namePlaceholder: 'Your name',
+        emailLabel: 'Email',
+        emailPlaceholder: 'your@email.com',
+        phoneLabel: 'Phone or WhatsApp',
+        phonePlaceholder: '+40...',
+        projectTypeLabel: 'Project type',
+        budgetLabel: 'Estimated budget',
+        detailsLabel: 'Project details',
+        detailsPlaceholder:
+          'Tell us what kind of business you have, what pages you need, and any functionality you already know you want.',
+        projectTypeOptions: [
+          'Custom website',
+          'Website redesign',
+          'Website with custom functionality',
+          'App or software product',
+        ],
+        budgetOptions: ['From 500 EUR', 'From 900 EUR', 'From 1500 EUR', 'Need guidance'],
+        submitIdle: 'Request offer',
+        submitSending: 'Sending request...',
+        successMessage:
+          'Your request has been sent. We will come back to you on the email you provided.',
+        errorMessage:
+          'The form could not be sent right now. Please use the direct email button below.',
+        privacyNote:
+          'By sending this form, you agree that Reality Computer Software may use your details to reply to your request.',
+        directEmail: 'Email directly',
+        subject: 'New website offer request',
+      },
       contactSection: {
         eyebrow: 'Contact',
-        title: "Let's talk about a website, an app, or your next digital product.",
+        title: 'Prefer to contact us directly?',
         description:
-          'Reach out directly for a custom website, a tailored app, a software product, or a collaboration idea.',
+          'You can still reach Reality Computer Software directly by email or WhatsApp for website work, custom apps, software products, or collaboration requests.',
         email: 'Email',
         whatsapp: 'WhatsApp',
         registryLabels: {
@@ -839,75 +882,85 @@ export const siteContent = {
     home: {
       hero: {
         eyebrow: 'Reality Computer Software',
-        title: 'Website-uri premium, aplicatii personalizate si produse software construite clar.',
+        title: 'Website-uri personalizate care arata premium si te ajuta sa fii contactat mai usor.',
         body:
-          'Reality Computer Software este un studio din Bucuresti care creeaza website-uri personalizate, instrumente digitale facute pe nevoi reale, produse software si concepte selectate de jocuri, cu accent pe design bun si experienta clara.',
-        primaryCta: 'Vezi lucrarile',
-        secondaryCta: 'Exploreaza SiteFlow',
+          'Reality Computer Software creeaza website-uri de prezentare, website-uri pentru afaceri si experiente digitale personalizate pentru branduri care au nevoie de incredere, claritate si o prezenta online finisata.',
+        primaryCta: 'Cere oferta pentru website',
+        secondaryCta: 'Vezi exemplele de website',
       },
       stats: [
         {
-          value: '05',
-          label: 'Lansari prezentate',
-          detail: 'Trei website-uri realizate pentru clienti si doua produse digitale proprii.',
+          value: '€500+',
+          label: 'Pret de pornire pentru website',
+          detail: 'Un website de prezentare poate porni de la 500 EUR, in functie de complexitate.',
         },
         {
-          value: '04',
-          label: 'Tipuri de servicii',
-          detail: 'Website-uri personalizate, aplicatii, produse software si concepte de jocuri.',
+          value: '03',
+          label: 'Exemple publice de website',
+          detail: 'partyplay.ro, lapisici.ro si spiritualis.ro sunt deja live.',
         },
         {
-          value: 'RO',
-          label: 'Construit din Bucuresti',
-          detail: 'Studio romanesc cu mentalitate de produs international.',
+          value: 'Responsive',
+          label: 'Arata bine pe orice ecran',
+          detail: 'Website-urile sunt gandite sa arate clar si profesionist pe desktop si telefon.',
         },
       ],
       orbitSignals: [
-        { label: 'Sisteme SaaS', top: '6%', left: '18%' },
-        { label: 'Aplicatii mobile', top: '20%', left: '74%' },
-        { label: 'Concepte de joc', top: '58%', left: '82%' },
-        { label: 'Automatizare', top: '78%', left: '18%' },
-        { label: 'Instrumente web', top: '48%', left: '4%' },
+        { label: 'Website-uri de prezentare', top: '6%', left: '14%' },
+        { label: 'Website-uri de servicii', top: '22%', left: '70%' },
+        { label: 'Formulare si programari', top: '56%', left: '78%' },
+        { label: 'Pagini bilingve', top: '78%', left: '18%' },
+        { label: 'Structura buna pentru SEO', top: '48%', left: '1%' },
       ],
-      observatory: {
-        toplineLeft: 'Prezentare RCS',
-        toplineRight: 'Stare: portofoliu in crestere',
-        title: 'Produse clare, prezentate premium.',
+      websiteOffer: {
+        toplineLeft: 'Serviciul cel mai cerut',
+        toplineRight: 'Oferte pentru website',
+        priceLabel: 'Pornind de la',
+        priceValue: '500 EUR',
+        title: 'Un website serios pentru afacerea ta trebuie sa fie usor de inteles si usor de crezut.',
         body:
-          'Directia vizuala combina claritatea unui produs serios cu o atmosfera inspirata din spatiu, astfel incat site-ul sa fie memorabil si usor de parcurs.',
-        signals: [
+          'Potrivit pentru afaceri locale, servicii, locatii, consultanti si companii in crestere care au nevoie de o prezenta online premium si de o cale clara de contact.',
+        tags: ['Design premium', 'Responsive', 'Structura buna pentru SEO'],
+        pricing: [
           {
-            title: 'Portofoliu bine structurat',
-            body: 'Paginile companiei, produselor, preturilor si informatiilor legale sunt legate clar intre ele.',
+            title: 'Website de prezentare',
+            price: 'de la 500 EUR',
+            body: 'Pentru pagina de companie, landing page sau website mic de servicii.',
           },
           {
-            title: 'Prezenta completa pentru produs',
-            body: 'SiteFlow are deja propria pagina de prezentare, pagina de preturi si pagina legala.',
+            title: 'Website pentru afacere',
+            price: 'de la 900 EUR',
+            body: 'Pentru website-uri cu mai multe sectiuni, portofoliu si flux de contact mai puternic.',
           },
           {
-            title: 'Pregatit pentru crestere',
-            body: 'Structura poate primi produse noi fara sa fie nevoie de o refacere completa.',
+            title: 'Functionalitati personalizate',
+            price: 'Oferta personalizata',
+            body: 'Pentru programari, formulare avansate, zone de client, integrari sau logica proprie.',
           },
         ],
+        priceNote:
+          'Pretul final depinde de numarul de pagini, directia vizuala, limbile dorite, integrarile si functionalitatile exacte de care are nevoie website-ul.',
       },
       servicesSection: {
         eyebrow: 'Servicii',
-        title:
-          'Servicii organizate dupa ce cauta in mod normal un client.',
+        title: 'Website-urile personalizate sunt serviciul principal. Restul vine cand proiectul are nevoie de mai mult.',
         description:
-          'Fie ca ai nevoie de un website personalizat, de o aplicatie facuta pentru fluxul tau, de un produs software sau de un concept de joc, rezultatul ramane clar, finisat si usor de folosit.',
+          'Daca ai nevoie de un website serios pentru afacerea ta, aici este accentul principal. Aplicatiile, produsele software si celelalte constructii personalizate apar atunci cand business-ul chiar are nevoie de mai mult decat un site de prezentare.',
       },
       services: [
         {
           id: 'websites',
           title: 'Website-uri personalizate',
           description:
-            'Website-uri de companie pentru servicii, branduri, locatii si platforme de continut care au nevoie de o prima impresie puternica.',
+            'Website-uri de companie, website-uri de servicii si pagini de lansare construite sa arate profesionist, sa explice clar oferta si sa transforme vizitatorii in cereri reale.',
+          featured: true,
+          priceFrom: 'Pornind de la 500 EUR',
           points: [
-            'Website-uri de companie si landing page-uri',
-            'Prezentare clara a serviciilor si contactului',
-            'Constructie mobile-ready cu directie vizuala premium',
+            'Website-uri de prezentare, website-uri pentru afaceri si landing page-uri',
+            'Structura clara, incredere si contact usor de gasit',
+            'Constructie responsive pentru desktop si mobil',
           ],
+          ctaLabel: 'Cere oferta pentru website',
         },
         {
           id: 'apps',
@@ -1020,7 +1073,7 @@ export const siteContent = {
           category: 'software',
           title: 'Horeca Tracker',
           type: 'Software personalizat',
-          href: 'https://horeca-tracker-six.vercel.app',
+          href: 'https://horeca-tracker.realitysoft.ro',
           external: true,
           description:
             'Un produs gandit pentru operatorii HORECA care vor o imagine mai clara asupra activitatii zilnice, stocurilor, timpilor si rezultatelor.',
@@ -1082,34 +1135,67 @@ export const siteContent = {
         },
       ],
       principlesSection: {
-        eyebrow: 'De ce functioneaza',
-        title:
-          'Limbajul vizual tinteste un aer premium, dar structura ramane utila comercial.',
+        eyebrow: 'Ce conteaza pentru clienti',
+        title: 'Un website bun ar trebui sa iti faca afacerea mai clara, mai credibila si mai usor de contactat.',
         description:
-          'Miscarea, profunzimea si atmosfera sustin mesajul: RCS construieste software serios, dar cu personalitate.',
+          'Partea vizuala conteaza, dar clientii au nevoie si de viteza, claritate, utilizare buna pe mobil si o structura care ii ajuta sa actioneze.',
       },
       principles: [
         {
-          title: 'Semnal inainte de zgomot',
+          title: 'Prezentare clara a serviciilor',
           description:
-            'Sisteme vizuale puternice, ierarhie curata si miscare care explica in loc sa distraga.',
+            'Vizitatorul trebuie sa inteleaga rapid ce oferi, cui te adresezi si cum poate lua legatura cu tine.',
         },
         {
-          title: 'Storytelling condus de produs',
+          title: 'Prima impresie premium',
           description:
-            'Fiecare sectiune clarifica ce face produsul, pe cine ajuta si de ce conteaza acum.',
+            'Website-ul trebuie sa para serios, actual si memorabil din prima secunda.',
         },
         {
-          title: 'Baza solida pentru lansare',
+          title: 'Loc pentru crestere ulterioara',
           description:
-            'Rutele, informatiile legale, contactul si paginile de preturi sunt pregatite pentru o lansare reala.',
+            'O structura buna face mai usoara adaugarea de pagini, limbi, servicii sau functionalitati noi in timp.',
         },
       ],
+      offerForm: {
+        eyebrow: 'Cere oferta',
+        title: 'Spune-ne ce fel de website ai nevoie.',
+        description:
+          'Trimite un scurt brief si primesti o estimare adaptata in functie de pagini, directia de design si functionalitatile necesare.',
+        nameLabel: 'Nume',
+        namePlaceholder: 'Numele tau',
+        emailLabel: 'Email',
+        emailPlaceholder: 'emailul-tau@exemplu.ro',
+        phoneLabel: 'Telefon sau WhatsApp',
+        phonePlaceholder: '+40...',
+        projectTypeLabel: 'Tip proiect',
+        budgetLabel: 'Buget estimat',
+        detailsLabel: 'Detalii proiect',
+        detailsPlaceholder:
+          'Spune-ne pe scurt ce tip de afacere ai, ce pagini iti doresti si ce functionalitati stii deja ca ai nevoie.',
+        projectTypeOptions: [
+          'Website personalizat',
+          'Refacere website',
+          'Website cu functionalitati personalizate',
+          'Aplicatie sau produs software',
+        ],
+        budgetOptions: ['De la 500 EUR', 'De la 900 EUR', 'De la 1500 EUR', 'Am nevoie de indrumare'],
+        submitIdle: 'Trimite cererea',
+        submitSending: 'Se trimite...',
+        successMessage:
+          'Cererea a fost trimisa. Revenim pe emailul pe care l-ai completat.',
+        errorMessage:
+          'Cererea nu a putut fi trimisa acum. Foloseste butonul de email direct de mai jos.',
+        privacyNote:
+          'Prin trimiterea formularului esti de acord ca Reality Computer Software sa foloseasca datele tale pentru a raspunde cererii.',
+        directEmail: 'Email direct',
+        subject: 'Cerere noua de oferta pentru website',
+      },
       contactSection: {
         eyebrow: 'Contact',
-        title: 'Hai sa vorbim despre un website, o aplicatie sau urmatorul tau produs digital.',
+        title: 'Preferi contact direct?',
         description:
-          'Scrie-ne direct pentru un website personalizat, o aplicatie facuta pe nevoia ta, un produs software sau o idee de colaborare.',
+          'Ne poti scrie in continuare direct pe email sau WhatsApp pentru website-uri, aplicatii personalizate, produse software sau idei de colaborare.',
         email: 'Email',
         whatsapp: 'WhatsApp',
         registryLabels: {
