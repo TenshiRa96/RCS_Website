@@ -2,6 +2,7 @@ import type { FormEvent } from 'react'
 import { ArrowRight, LoaderCircle, Mail } from 'lucide-react'
 import { useState } from 'react'
 import { company } from '../data/site'
+import { useLocale } from '../i18n'
 
 type OfferRequestFormContent = {
   eyebrow: string
@@ -39,35 +40,34 @@ export default function OfferRequestForm({
   content,
   showIntro = true,
 }: OfferRequestFormProps) {
+  const { locale } = useLocale()
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
     const formData = new FormData(form)
-
-    formData.append('_subject', content.subject)
-    formData.append('_template', 'table')
-
-    const replyTo = formData.get('email')
-
-    if (typeof replyTo === 'string' && replyTo.length > 0) {
-      formData.append('_replyto', replyTo)
-    }
-
-    if (typeof window !== 'undefined') {
-      formData.append('_url', window.location.href)
+    const payload = {
+      name: String(formData.get('name') ?? ''),
+      email: String(formData.get('email') ?? ''),
+      phone: String(formData.get('phone') ?? ''),
+      projectType: String(formData.get('project_type') ?? ''),
+      budget: String(formData.get('budget') ?? ''),
+      message: String(formData.get('message') ?? ''),
+      pageUrl: typeof window !== 'undefined' ? window.location.href : '',
+      locale,
     }
 
     setSubmitState('sending')
 
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${company.email}`, {
+      const response = await fetch('/api/offer-request', {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: formData,
+        body: JSON.stringify(payload),
       })
 
       if (!response.ok) {
