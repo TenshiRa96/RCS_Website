@@ -16,9 +16,23 @@ function getRequiredEnv(name) {
   return value
 }
 
-function toPublicErrorMessage(error) {
+function toPublicErrorMessage(error, locale) {
+  const messages = locale === 'ro'
+    ? {
+        fallback:
+          'Cererea nu a putut fi trimisa momentan. Te rugam sa incerci din nou sau sa ne contactezi direct.',
+        direct:
+          'Cererea nu a putut fi trimisa acum. Te rugam sa folosesti emailul direct sau WhatsApp.',
+      }
+    : {
+        fallback:
+          'Your request could not be sent right now. Please try again or contact us directly.',
+        direct:
+          'Your request could not be sent right now. Please use the direct email or WhatsApp option.',
+      }
+
   if (error instanceof Error && error.message.startsWith('Missing environment variable:')) {
-    return 'Email service is not configured correctly on the server.'
+    return messages.direct
   }
 
   const errorCode = typeof error === 'object' && error && 'code' in error ? error.code : ''
@@ -26,14 +40,14 @@ function toPublicErrorMessage(error) {
     typeof error === 'object' && error && 'responseCode' in error ? error.responseCode : undefined
 
   if (errorCode === 'EAUTH' || responseCode === 535) {
-    return 'Email authentication failed. Check the Gmail app password.'
+    return messages.direct
   }
 
   if (errorCode === 'ETIMEDOUT' || errorCode === 'ESOCKET' || errorCode === 'ECONNECTION') {
-    return 'The email server could not be reached. Please try again shortly.'
+    return messages.fallback
   }
 
-  return 'Failed to send offer request.'
+  return messages.fallback
 }
 
 function escapeHtml(value) {
@@ -60,7 +74,7 @@ export default async function handler(request, response) {
       budget = '',
       message = '',
       pageUrl = '',
-      locale = '',
+      locale = 'en',
     } = request.body ?? {}
 
     if (!name || !email || !projectType || !budget || !message) {
@@ -129,6 +143,8 @@ export default async function handler(request, response) {
     return json(response, 200, { ok: true })
   } catch (error) {
     console.error('Offer request send failed', error)
-    return json(response, 500, { ok: false, error: toPublicErrorMessage(error) })
+    const locale =
+      typeof request.body?.locale === 'string' && request.body.locale === 'ro' ? 'ro' : 'en'
+    return json(response, 500, { ok: false, error: toPublicErrorMessage(error, locale) })
   }
 }
