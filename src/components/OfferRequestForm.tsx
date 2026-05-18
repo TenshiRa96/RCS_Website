@@ -1,6 +1,6 @@
 import type { FormEvent } from 'react'
-import { ArrowRight, LoaderCircle, Mail } from 'lucide-react'
-import { useState } from 'react'
+import { ArrowRight, ChevronDown, LoaderCircle, Mail } from 'lucide-react'
+import { useEffect, useId, useRef, useState } from 'react'
 import { company } from '../data/site'
 import { useLocale } from '../i18n'
 
@@ -36,6 +36,90 @@ type OfferRequestFormProps = {
 
 type SubmitState = 'idle' | 'sending' | 'success' | 'error'
 
+type OfferSelectProps = {
+  label: string
+  name: string
+  options: readonly string[]
+  value: string
+  onChange: (value: string) => void
+}
+
+function OfferSelect({ label, name, options, value, onChange }: OfferSelectProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const labelId = useId()
+  const listboxId = useId()
+
+  useEffect(() => {
+    if (!isOpen) {
+      return
+    }
+
+    function handlePointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen])
+
+  return (
+    <div
+      ref={rootRef}
+      className={`offer-field offer-field--select${isOpen ? ' offer-field--select-open' : ''}`}
+    >
+      <span id={labelId}>{label}</span>
+      <input type="hidden" name={name} value={value} />
+
+      <button
+        type="button"
+        className={`offer-select${isOpen ? ' offer-select--open' : ''}`}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-labelledby={labelId}
+        aria-controls={listboxId}
+        onClick={() => setIsOpen((open) => !open)}
+      >
+        <span className="offer-select__value">{value}</span>
+        <ChevronDown size={18} className="offer-select__chevron" />
+      </button>
+
+      {isOpen ? (
+        <div className="offer-select__menu" role="listbox" id={listboxId} aria-labelledby={labelId}>
+          {options.map((option) => (
+            <button
+              key={option}
+              type="button"
+              role="option"
+              aria-selected={option === value}
+              className={`offer-select__option${option === value ? ' is-selected' : ''}`}
+              onClick={() => {
+                onChange(option)
+                setIsOpen(false)
+              }}
+            >
+              {option}
+            </button>
+          ))}
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
 export default function OfferRequestForm({
   content,
   showIntro = true,
@@ -43,6 +127,8 @@ export default function OfferRequestForm({
   const { locale } = useLocale()
   const [submitState, setSubmitState] = useState<SubmitState>('idle')
   const [submitError, setSubmitError] = useState('')
+  const [projectType, setProjectType] = useState(content.projectTypeOptions[0] ?? '')
+  const [budget, setBudget] = useState(content.budgetOptions[0] ?? '')
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -52,8 +138,8 @@ export default function OfferRequestForm({
       name: String(formData.get('name') ?? ''),
       email: String(formData.get('email') ?? ''),
       phone: String(formData.get('phone') ?? ''),
-      projectType: String(formData.get('project_type') ?? ''),
-      budget: String(formData.get('budget') ?? ''),
+      projectType,
+      budget,
       message: String(formData.get('message') ?? ''),
       pageUrl: typeof window !== 'undefined' ? window.location.href : '',
       locale,
@@ -84,6 +170,8 @@ export default function OfferRequestForm({
       setSubmitState('success')
       setSubmitError('')
       form.reset()
+      setProjectType(content.projectTypeOptions[0] ?? '')
+      setBudget(content.budgetOptions[0] ?? '')
     } catch {
       setSubmitState('error')
     }
@@ -132,27 +220,23 @@ export default function OfferRequestForm({
           />
         </label>
 
-        <label className="offer-field">
-          <span>{content.projectTypeLabel}</span>
-          <select name="project_type" defaultValue={content.projectTypeOptions[0]} required>
-            {content.projectTypeOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
+        <OfferSelect
+          label={content.projectTypeLabel}
+          name="project_type"
+          options={content.projectTypeOptions}
+          value={projectType}
+          onChange={setProjectType}
+        />
 
-        <label className="offer-field offer-field--full">
-          <span>{content.budgetLabel}</span>
-          <select name="budget" defaultValue={content.budgetOptions[0]} required>
-            {content.budgetOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className="offer-field--full">
+          <OfferSelect
+            label={content.budgetLabel}
+            name="budget"
+            options={content.budgetOptions}
+            value={budget}
+            onChange={setBudget}
+          />
+        </div>
 
         <label className="offer-field offer-field--full">
           <span>{content.detailsLabel}</span>
