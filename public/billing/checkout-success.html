@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SiteFlow Pro Activation</title>
+    <link rel="stylesheet" href="/billing/checkout.css">
+  </head>
+  <body>
+    <main class="billing-shell">
+      <section class="billing-card">
+        <p class="eyebrow">Reality Computer Software</p>
+        <h1 id="success-title">Finalizing your activation...</h1>
+        <p id="success-copy" class="copy">Please wait while we confirm your purchase and prepare your lifetime Pro key.</p>
+
+        <div id="success-key-block" class="key-block" hidden>
+          <label class="field">
+            <span>Your Pro key</span>
+            <textarea id="license-key-output" rows="4" readonly></textarea>
+          </label>
+          <div class="actions">
+            <button id="copy-license-key" class="primary-button" type="button">Copy key</button>
+          </div>
+          <p class="helper">Paste this key into SiteFlow -> Manage library -> Access & Setup -> Activate key.</p>
+        </div>
+
+        <div id="success-meta" class="meta" hidden></div>
+        <p id="success-status" class="status" aria-live="polite"></p>
+        <div class="billing-links">
+          <a href="/siteflow" target="_blank" rel="noreferrer">Product page</a>
+          <a href="/siteflow/pricing" target="_blank" rel="noreferrer">Pricing</a>
+          <a href="/siteflow/legal" target="_blank" rel="noreferrer">Terms, privacy, and refunds</a>
+          <a href="mailto:realitycomputersoftware@gmail.com">Support</a>
+        </div>
+        <p class="helper company-note">SiteFlow Playbooks is offered by Reality Computer Software SRL.</p>
+      </section>
+    </main>
+
+    <script src="/billing/checkout-success.js"></script>
+  </body>
+</html>
