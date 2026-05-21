@@ -3,6 +3,9 @@
   const titleEl = document.getElementById("billing-title");
   const copyEl = document.getElementById("billing-copy");
   const statusEl = document.getElementById("billing-status");
+  const currentUrl = new URL(window.location.href);
+  const transactionId = currentUrl.searchParams.get("_ptxn")
+    || currentUrl.searchParams.get("transaction_id");
 
   function setStatus(message) {
     statusEl.textContent = message || "";
@@ -30,10 +33,6 @@
   }
 
   async function openCheckout() {
-    const currentUrl = new URL(window.location.href);
-    const transactionId = currentUrl.searchParams.get("_ptxn")
-      || currentUrl.searchParams.get("transaction_id");
-
     if (!transactionId) {
       setError("This page is missing the transaction ID.");
       return;
@@ -54,29 +53,40 @@
       globalThis.Paddle.Environment.set("sandbox");
     }
 
-    let redirected = false;
     globalThis.Paddle.Initialize({
       token: config.clientToken,
+      checkout: {
+        settings: {
+          displayMode: "overlay",
+          theme: "light",
+          successUrl: successUrl.toString()
+        }
+      },
       eventCallback(event) {
-        if (event?.name === "checkout.completed" && !redirected) {
-          redirected = true;
+        if (event?.name === "checkout.completed") {
           setStatus("Payment completed. Redirecting...");
           window.location.href = successUrl.toString();
+          return;
+        }
+
+        if (event?.name === "checkout.loaded") {
+          titleEl.textContent = "Secure checkout is ready";
+          copyEl.textContent = "Complete your purchase in the checkout window. You will be redirected back here automatically when payment succeeds.";
+          setStatus("Checkout opened.");
+          return;
+        }
+
+        if (event?.name === "checkout.error") {
+          const detail = event?.detail || event?.errors?.[0]?.message || "Could not open checkout.";
+          setError(detail);
+          setStatus(detail);
         }
       }
     });
 
-    titleEl.textContent = "Secure checkout is ready";
+    titleEl.textContent = "Secure checkout is loading";
     copyEl.textContent = "Complete your purchase in the checkout window. You will be redirected back here automatically when payment succeeds.";
     setStatus("Opening checkout...");
-
-    globalThis.Paddle.Checkout.open({
-      transactionId,
-      settings: {
-        successUrl: successUrl.toString(),
-        theme: "light"
-      }
-    });
   }
 
   openCheckout().catch((error) => {
