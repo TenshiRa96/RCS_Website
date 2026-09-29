@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Layout from './components/Layout'
 import ScrollToTop from './components/ScrollToTop'
 import CompanyLegalPage from './pages/CompanyLegalPage'
+import FufletPrivacyPage from './pages/FufletPrivacyPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import SiteFlowLegalPage from './pages/SiteFlowLegalPage'
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/storybook/pricing" element={<SiteFlowPricingPage />} />
             <Route path="/siteflow/legal" element={<SiteFlowLegalPage />} />
             <Route path="/storybook/legal" element={<SiteFlowLegalPage />} />
+            <Route path="/fuflet/privacy" element={<FufletPrivacyPage />} />
             <Route path="/legal" element={<CompanyLegalPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
