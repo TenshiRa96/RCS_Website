@@ -7,7 +7,7 @@ const callbackUrl = `https://cloud-code.services.api.unity.com/v1/projects/${pro
 
 // Vercel Node server function. No client bundle imports, no query/credential logs.
 // Paused unless explicitly configured; development only, never route by query.
-export function createHandler({ env = process.env, fetcher = fetch } = {}) {
+export function createHandler({ env = process.env, fetcher = fetch, diagnostic = event => console.warn(JSON.stringify(event)) } = {}) {
   return async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -38,22 +38,33 @@ export function createHandler({ env = process.env, fetcher = fetch } = {}) {
     // Authenticate only after the callback has passed its signature check.
     // One bounded attempt: provider retries are safe after a lost response.
     const signal = AbortSignal.timeout(15000);
+    let stage = 'token_exchange', upstreamStatus = null;
     try {
       const auth = Buffer.from(`${env.FUFLET_UGS_RELAY_KEY_ID}:${env.FUFLET_UGS_RELAY_SECRET}`).toString('base64');
       const exchange = await fetcher(exchangeUrl, { method:'POST', redirect:'error', signal,
         headers:{ Authorization:`Basic ${auth}`, 'Content-Type':'application/json' }, body:'{}' });
+      upstreamStatus = exchange.status;
       if (exchange.status !== 200) throw Error();
+      stage = 'token_response';
       const token = (await limitedJson(exchange)).accessToken;
       if (typeof token !== 'string' || token.length < 16 || token.length > 16384 || /\s/.test(token)) throw Error();
+      stage = 'cloud_code'; upstreamStatus = null;
       const result = await fetcher(callbackUrl, { method:'POST', redirect:'error', signal,
         headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json', UnityEnvironment:'development' },
         body:JSON.stringify({ params:{ callback:{ fields:entries.map(([name,value]) => ({name,value})) } } }) });
+      upstreamStatus = result.status;
       if (result.status !== 200) throw Error();
+      stage = 'commit_response';
       const response = (await limitedJson(result)).output;
       if (response?.accepted !== true || response.eventId !== eventId) throw Error();
       // Required by LevelPlay; never acknowledge before the durable UGS commit.
       return reply(200, `${eventId}:OK`);
-    } catch { return reply(503, 'retry_required'); }
+    } catch {
+      // Fixed labels + numeric status only: never record callback identifiers,
+      // query strings, tokens, exception messages or upstream response bodies.
+      try { diagnostic({ event:'levelplay_relay_failure', stage, upstreamStatus }); } catch { }
+      return reply(503, 'retry_required');
+    }
   };
 }
 
