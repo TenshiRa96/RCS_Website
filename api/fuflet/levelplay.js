@@ -44,7 +44,8 @@ export function createHandler({ env = process.env, fetcher = fetch, diagnostic =
       const exchange = await fetcher(exchangeUrl, { method:'POST', redirect:'error', signal,
         headers:{ Authorization:`Basic ${auth}`, 'Content-Type':'application/json' }, body:'{}' });
       upstreamStatus = exchange.status;
-      if (exchange.status !== 200) throw Error();
+      // Live token exchange returns 201 Created; docs also describe 200 OK.
+      if (exchange.status !== 200 && exchange.status !== 201) throw Error();
       stage = 'token_response';
       const token = (await limitedJson(exchange)).accessToken;
       if (typeof token !== 'string' || token.length < 16 || token.length > 16384 || /\s/.test(token)) throw Error();
