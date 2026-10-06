@@ -7,7 +7,10 @@ const callbackUrl = `https://cloud-code.services.api.unity.com/v1/projects/${pro
 
 // Vercel Node server function. No client bundle imports, no query/credential logs.
 // Paused unless explicitly configured; development only, never route by query.
-export function createHandler({ env = process.env, fetcher = fetch, diagnostic = event => console.warn(JSON.stringify(event)) } = {}) {
+export function createHandler({ env = process.env, fetcher = fetch, diagnostic = event => console.warn(JSON.stringify(event)), now = Date.now } = {}) {
+  // Unity exchange tokens have a documented one-hour TTL. Retain them only in
+  // this server instance for 50 minutes; never expose or persist the bearer.
+  let cachedToken = null;
   return async (req, res) => {
     res.setHeader('Cache-Control', 'no-store');
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
@@ -40,20 +43,28 @@ export function createHandler({ env = process.env, fetcher = fetch, diagnostic =
     const signal = AbortSignal.timeout(15000);
     let stage = 'token_exchange', upstreamStatus = null;
     try {
-      const auth = Buffer.from(`${env.FUFLET_UGS_RELAY_KEY_ID}:${env.FUFLET_UGS_RELAY_SECRET}`).toString('base64');
-      const exchange = await fetcher(exchangeUrl, { method:'POST', redirect:'error', signal,
-        headers:{ Authorization:`Basic ${auth}`, 'Content-Type':'application/json' }, body:'{}' });
-      upstreamStatus = exchange.status;
-      // Live token exchange returns 201 Created; docs also describe 200 OK.
-      if (exchange.status !== 200 && exchange.status !== 201) throw Error();
-      stage = 'token_response';
-      const token = (await limitedJson(exchange)).accessToken;
-      if (typeof token !== 'string' || token.length < 16 || token.length > 16384 || /\s/.test(token)) throw Error();
+      const identity = createHash('sha256').update(env.FUFLET_UGS_RELAY_KEY_ID + ':' + env.FUFLET_UGS_RELAY_SECRET).digest('hex');
+      let token = cachedToken?.identity === identity && cachedToken.expires > now() ? cachedToken.token : null;
+      if (!token) {
+        cachedToken = null;
+        const started = now();
+        const auth = Buffer.from(`${env.FUFLET_UGS_RELAY_KEY_ID}:${env.FUFLET_UGS_RELAY_SECRET}`).toString('base64');
+        const exchange = await fetcher(exchangeUrl, { method:'POST', redirect:'error', signal,
+          headers:{ Authorization:`Basic ${auth}`, 'Content-Type':'application/json' }, body:'{}' });
+        upstreamStatus = exchange.status;
+        // Live token exchange returns 201 Created; docs also describe 200 OK.
+        if (exchange.status !== 200 && exchange.status !== 201) throw Error();
+        stage = 'token_response';
+        token = (await limitedJson(exchange)).accessToken;
+        if (typeof token !== 'string' || token.length < 16 || token.length > 16384 || /\s/.test(token)) throw Error();
+        cachedToken = { identity, token, expires: started + 50 * 60 * 1000 };
+      }
       stage = 'cloud_code'; upstreamStatus = null;
       const result = await fetcher(callbackUrl, { method:'POST', redirect:'error', signal,
         headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json', UnityEnvironment:'development' },
         body:JSON.stringify({ params:{ callback:{ fields:entries.map(([name,value]) => ({name,value})) } } }) });
       upstreamStatus = result.status;
+      if (result.status === 401 || result.status === 403) cachedToken = null;
       if (result.status !== 200) throw Error();
       stage = 'commit_response';
       const response = (await limitedJson(result)).output;
