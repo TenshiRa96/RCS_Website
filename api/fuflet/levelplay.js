@@ -1,12 +1,11 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
 
 const project = '0ad517ba-e57c-4140-a286-5c4748317603';
-const environmentId = 'ceaa5108-9140-467f-a98d-47c0cf870f35';
-const exchangeUrl = `https://services.api.unity.com/auth/v1/token-exchange?projectId=${project}&environmentId=${environmentId}`;
+const environments = Object.freeze({ development: 'ceaa5108-9140-467f-a98d-47c0cf870f35', beta: 'a3634af2-0adf-4673-be80-558aba5395c5' });
 const callbackUrl = `https://cloud-code.services.api.unity.com/v1/projects/${project}/modules/Fuflet/ReceiveLevelPlayCompletion`;
 
 // Vercel Node server function. No client bundle imports, no query/credential logs.
-// Paused unless explicitly configured; development only, never route by query.
+// Paused unless explicitly configured. Beta needs a second approval gate; never route by query.
 export function createHandler({ env = process.env, fetcher = fetch, diagnostic = event => console.warn(JSON.stringify(event)), now = Date.now } = {}) {
   // Unity exchange tokens have a documented one-hour TTL. Retain them only in
   // this server instance for 50 minutes; never expose or persist the bearer.
@@ -17,7 +16,8 @@ export function createHandler({ env = process.env, fetcher = fetch, diagnostic =
     res.setHeader('X-Content-Type-Options', 'nosniff');
     const reply = (status, body) => { res.statusCode = status; res.end(body); };
     if (req.method !== 'GET') { res.setHeader('Allow', 'GET'); return reply(405, 'method_not_allowed'); }
-    if (env.FUFLET_AD_CALLBACK_ENABLED !== 'development' ||
+    const environment = env.FUFLET_AD_CALLBACK_ENABLED;
+    if (!Object.hasOwn(environments, environment) || environment === 'beta' && env.FUFLET_AD_BETA_APPROVED !== 'true' ||
         !/^[A-Za-z0-9_-]{8,128}$/.test(env.FUFLET_UGS_RELAY_KEY_ID || '') ||
         !/^[\x21-\x7e]{16,512}$/.test(env.FUFLET_UGS_RELAY_SECRET || '') ||
         !/^[\x21-\x7e]{32,256}$/.test(env.FUFLET_LEVELPLAY_CALLBACK_KEY || '')) return reply(503, 'not_configured');
@@ -43,7 +43,8 @@ export function createHandler({ env = process.env, fetcher = fetch, diagnostic =
     const signal = AbortSignal.timeout(15000);
     let stage = 'token_exchange', upstreamStatus = null;
     try {
-      const identity = createHash('sha256').update(env.FUFLET_UGS_RELAY_KEY_ID + ':' + env.FUFLET_UGS_RELAY_SECRET).digest('hex');
+      const identity = createHash('sha256').update(environment + ':' + env.FUFLET_UGS_RELAY_KEY_ID + ':' + env.FUFLET_UGS_RELAY_SECRET).digest('hex');
+      const exchangeUrl = `https://services.api.unity.com/auth/v1/token-exchange?projectId=${project}&environmentId=${environments[environment]}`;
       let token = cachedToken?.identity === identity && cachedToken.expires > now() ? cachedToken.token : null;
       if (!token) {
         cachedToken = null;
@@ -61,7 +62,7 @@ export function createHandler({ env = process.env, fetcher = fetch, diagnostic =
       }
       stage = 'cloud_code'; upstreamStatus = null;
       const result = await fetcher(callbackUrl, { method:'POST', redirect:'error', signal,
-        headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json', UnityEnvironment:'development' },
+        headers:{ Authorization:`Bearer ${token}`, 'Content-Type':'application/json', UnityEnvironment:environment },
         body:JSON.stringify({ params:{ callback:{ fields:entries.map(([name,value]) => ({name,value})) } } }) });
       upstreamStatus = result.status;
       if (result.status === 401 || result.status === 403) cachedToken = null;
