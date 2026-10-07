@@ -73,7 +73,7 @@ export default function FufletPrivacyPage() {
             <p style={{ lineHeight: 1.8, overflowWrap: 'anywhere' }}>{body}</p>
             {id === 'operator' && <p style={{ lineHeight: 1.8 }}>{company.registeredOffice} · CUI {company.cui} · {company.tradeRegister}</p>}
             {id === 'support' && <p style={{ lineHeight: 1.8 }}><a href="https://policies.google.com/privacy">Google Privacy</a> · <a href="https://policies.google.com/privacy/frameworks">Google — data transfers</a></p>}
-            {id === 'rights' && <a href="https://www.dataprotection.ro/">ANSPDCP</a>}
+            {id === 'rights' && <><p style={{ marginBlock: '1rem' }}><Link to="/fuflet/delete-account">{locale === 'ro' ? 'Solicită ștergerea contului sau a datelor Fuflet' : 'Request deletion of your Fuflet account or data'}</Link></p><a href="https://www.dataprotection.ro/">ANSPDCP</a></>}
           </section>
         ))}
         <p style={{ marginBlock: '1.5rem', overflowWrap: 'anywhere' }}>{copy.contact}: <a href="mailto:realitycomputersoftware.rcs@gmail.com">realitycomputersoftware.rcs@gmail.com</a></p>
