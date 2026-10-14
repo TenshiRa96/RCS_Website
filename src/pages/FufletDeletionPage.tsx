@@ -24,7 +24,7 @@ const copy = {
     scope: 'What deletion covers',
     scopeBody: 'An online account deletion request covers the Fuflet game account and its associated online progress, inventory and game records. It does not delete your Google account or Google Play purchase history. If particular records must be retained for a documented legal, security or fraud-prevention reason, we will explain which records, why, and for how long in our response.',
     local: 'Progress stored only on your phone',
-    localBody: 'The offline beta keeps its adventure on your device. We cannot remotely erase that local save. Android app-data controls and any device-backup settings are separate; clearing game storage can permanently remove local progress. You can still contact us about any data you have sent to us.',
+    localBody: 'Local play keeps its adventure on your device, separately from an optional online profile. We cannot remotely erase that local save. Clearing game storage can permanently remove local progress and access to an unlinked guest account; request online account deletion before doing so if you still have access. Complete online beta builds from version 0.1.180 disable Android app-data cloud backup and device transfer. Older backups, if any, are managed by your backup provider. You can still contact us about online data even without access to the game.',
     policy: 'Read the privacy policy',
   },
   ro: {
@@ -46,7 +46,7 @@ const copy = {
     scope: 'Ce include ștergerea',
     scopeBody: 'Cererea de ștergere a unui cont online include contul Fuflet, progresul online, inventarul și înregistrările de joc asociate. Nu șterge contul Google sau istoricul cumpărăturilor din Google Play. Dacă anumite evidențe trebuie păstrate din motive documentate legate de lege, securitate sau prevenirea fraudei, îți explicăm în răspuns ce păstrăm, de ce și pentru cât timp.',
     local: 'Progresul păstrat doar pe telefon',
-    localBody: 'Versiunea beta offline păstrează aventura pe dispozitivul tău. Nu putem șterge de la distanță această salvare locală. Gestionarea datelor aplicației în Android și eventualele copii de siguranță ale telefonului sunt separate; golirea datelor jocului poate elimina definitiv progresul local. Ne poți contacta în continuare pentru datele pe care ni le-ai trimis.',
+    localBody: 'Aventura locală rămâne pe dispozitiv, separat de profilul online opțional. Nu putem șterge de la distanță salvarea locală. Golirea datelor jocului poate elimina definitiv progresul local și accesul la un cont de oaspete neasociat; dacă mai ai acces și dorești ștergerea contului online, solicit-o înainte. Versiunile beta cu aventura online completă, începând cu 0.1.180, dezactivează copierea datelor aplicației în cloud prin Android și transferul între dispozitive. Eventualele copii mai vechi sunt gestionate de furnizorul lor. Ne poți contacta pentru datele online chiar dacă nu mai ai acces la joc.',
     policy: 'Citește politica de confidențialitate',
   },
 }
